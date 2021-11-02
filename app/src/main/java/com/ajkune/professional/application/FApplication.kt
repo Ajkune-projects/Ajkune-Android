@@ -29,7 +29,7 @@ class FApplication : Application(), HasActivityInjector, HasSupportFragmentInjec
             .build()
             .inject(this)
 
-        //baseAccountManager.start()
+        baseAccountManager.start()
 
     }
 
