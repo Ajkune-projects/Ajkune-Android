@@ -1,12 +1,12 @@
-package com.ajkune.professional.architecture.fragment.dashboard
+package com.ajkune.professional.architecture.fragment.onboarding
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
@@ -49,6 +49,9 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onClickEvents() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun setToolbar() {

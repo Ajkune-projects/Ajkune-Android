@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cl_transparent">#00000000</color>
+
+
+    <color name="cl_a8466f">#a8466f</color>
+    <color name="cl_37474f">#37474f</color>
+
+
 </resources>
