@@ -10,4 +10,24 @@
         android:name="com.ajkune.professional.architecture.fragment.dashboard.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/home_fragment"/>
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.AppointmentFragment"
+        android:label="AppointmentFragment"
+        tools:layout="@layout/appointment_fragment"/>
+    <fragment
+        android:id="@+id/gifsFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.GifsFragment"
+        android:label="GifsFragment"
+        tools:layout="@layout/gifs_fragment"/>
+    <fragment
+        android:id="@+id/offersFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.OffersFragment"
+        android:label="OffersFragment"
+        tools:layout="@layout/offers_fragment"/>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/account_fragment"/>
 </navigation>

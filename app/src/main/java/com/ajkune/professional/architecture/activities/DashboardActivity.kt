@@ -64,22 +64,22 @@ class DashboardActivity : BaseActivity() {
         }
 
         binding.dashboardNavigationView.appointmentFragment.setOnClickListener {
-            navHostFragment.navController.navigate(R.id.homeFragment)
+            navHostFragment.navController.navigate(R.id.appointmentFragment)
             changeBottomFocusScreen("AppointmentFragment")
         }
 
         binding.dashboardNavigationView.gifsFragment.setOnClickListener {
-            navHostFragment.navController.navigate(R.id.homeFragment)
+            navHostFragment.navController.navigate(R.id.gifsFragment)
             changeBottomFocusScreen("GifsFragment")
         }
 
         binding.dashboardNavigationView.offersFragment.setOnClickListener {
-            navHostFragment.navController.navigate(R.id.homeFragment)
+            navHostFragment.navController.navigate(R.id.offersFragment)
             changeBottomFocusScreen("OffersFragment")
         }
 
         binding.dashboardNavigationView.accountFragment.setOnClickListener {
-            navHostFragment.navController.navigate(R.id.homeFragment)
+            navHostFragment.navController.navigate(R.id.accountFragment)
             changeBottomFocusScreen("AccountFragment")
         }
 

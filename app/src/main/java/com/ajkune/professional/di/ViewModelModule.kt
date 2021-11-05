@@ -2,7 +2,7 @@ package com.ajkune.professional.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ajkune.professional.architecture.viewmodels.dashboard.HomeViewModel
+import com.ajkune.professional.architecture.viewmodels.dashboard.*
 import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
 import com.ajkune.professional.architecture.viewmodels.onboarding.RegisterViewModel
 import com.ajkune.professional.architecture.viewmodels.onboarding.WelcomeViewModel
@@ -36,6 +36,28 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppointmentViewModel::class)
+    abstract fun bindAppointmentViewModel(appointmentViewModel: AppointmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GifsViewModel::class)
+    abstract fun bindGifsViewModel(gifsViewModel: GifsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OffersViewModel::class)
+    abstract fun bindOffersViewModel(offersViewModel: OffersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountViewModel::class)
+    abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
+
 
 
     /**baseFactory for all [ViewModel]*/
