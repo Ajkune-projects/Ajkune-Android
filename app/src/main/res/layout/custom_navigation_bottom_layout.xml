@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomNavBar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/homeFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center|center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/homeFragmentIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tint="@color/cl_a8466f"
+                android:src="@drawable/home_icon" />
+
+            <TextView
+                android:id="@+id/homeFragmentText"
+                android:textSize="11sp"
+                android:fontFamily="@font/gordita_bold"
+                android:textColor="@color/cl_a8466f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/home" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/appointmentFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/appointmentFragmentIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/appointment_icon" />
+
+            <TextView
+                android:id="@+id/appointmentFragmentText"
+                android:textSize="11sp"
+                android:fontFamily="@font/gordita_bold"
+                android:textColor="@color/cl_8c93a9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/appointment"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/gifsFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/giftsFragmentIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/gifs_icon" />
+
+            <TextView
+                android:id="@+id/giftsFragmentText"
+                android:textSize="11sp"
+                android:fontFamily="@font/gordita_bold"
+                android:textColor="@color/cl_8c93a9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/gifs"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/offersFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/offersFragmentIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/offers_icon" />
+
+            <TextView
+                android:id="@+id/offersFragmentText"
+                android:textSize="11sp"
+                android:fontFamily="@font/gordita_bold"
+                android:textColor="@color/cl_8c93a9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/offers" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/accountFragmentIcon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_icon" />
+
+            <TextView
+                android:id="@+id/accountFragmentText"
+                android:textSize="11sp"
+                android:fontFamily="@font/gordita_bold"
+                android:textColor="@color/cl_8c93a9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/account" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.navigation.NavigationView>
+
+
+
+

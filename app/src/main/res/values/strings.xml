@@ -10,4 +10,9 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="already_a_member">Already a member?</string>
+    <string name="home">Home</string>
+    <string name="appointment">Appointment</string>
+    <string name="gifs">Gifs</string>
+    <string name="offers">Offers</string>
+    <string name="account">Account</string>
 </resources>
