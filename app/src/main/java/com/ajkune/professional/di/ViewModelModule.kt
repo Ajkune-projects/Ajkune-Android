@@ -3,6 +3,7 @@ package com.ajkune.professional.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
+import com.ajkune.professional.architecture.viewmodels.onboarding.RegisterViewModel
 import com.ajkune.professional.architecture.viewmodels.onboarding.WelcomeViewModel
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.di.anotation.ViewModelKey
@@ -24,6 +25,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WelcomeViewModel::class)
     abstract fun bindWelcomeViewModel(welcomeViewModel: WelcomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel::class)
+    abstract fun bindRegisterViewModel(registerViewModel: RegisterViewModel): ViewModel
 
 
     /**baseFactory for all [ViewModel]*/
