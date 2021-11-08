@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/homeFragmentText"
-                android:textSize="11sp"
+                android:textSize="9sp"
                 android:fontFamily="@font/gordita_bold"
                 android:textColor="@color/cl_a8466f"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
 
             <TextView
                 android:id="@+id/appointmentFragmentText"
-                android:textSize="11sp"
+                android:textSize="9sp"
                 android:fontFamily="@font/gordita_bold"
                 android:textColor="@color/cl_8c93a9"
                 android:layout_width="match_parent"
@@ -86,7 +86,7 @@
 
             <TextView
                 android:id="@+id/giftsFragmentText"
-                android:textSize="11sp"
+                android:textSize="9sp"
                 android:fontFamily="@font/gordita_bold"
                 android:textColor="@color/cl_8c93a9"
                 android:layout_width="match_parent"
@@ -113,7 +113,7 @@
 
             <TextView
                 android:id="@+id/offersFragmentText"
-                android:textSize="11sp"
+                android:textSize="9sp"
                 android:fontFamily="@font/gordita_bold"
                 android:textColor="@color/cl_8c93a9"
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
 
             <TextView
                 android:id="@+id/accountFragmentText"
-                android:textSize="11sp"
+                android:textSize="9sp"
                 android:fontFamily="@font/gordita_bold"
                 android:textColor="@color/cl_8c93a9"
                 android:layout_width="match_parent"

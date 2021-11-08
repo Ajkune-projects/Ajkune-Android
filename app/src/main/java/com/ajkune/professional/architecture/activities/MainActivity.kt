@@ -34,9 +34,9 @@ class MainActivity : BaseActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             var intent: Intent? = null
             if (baseAccountManager.isLogged()){
-                intent = Intent(this@MainActivity, DashboardActivity::class.java)
+                intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             }else{
-                intent = Intent(this@MainActivity, DashboardActivity::class.java)
+                intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             }
 
 
