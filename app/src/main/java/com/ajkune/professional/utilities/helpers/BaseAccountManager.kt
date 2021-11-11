@@ -85,6 +85,6 @@ class BaseAccountManager @Inject constructor(private val context: Context){
     }
 
     fun isLogged(): Boolean {
-        return true
+        return user != null
     }
 }

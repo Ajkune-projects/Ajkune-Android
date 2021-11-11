@@ -18,27 +18,17 @@ class LoaderFragment: DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (LoaderFragment.mIsBlackBackground) {
-//            setStyle(DialogFragment.STYLE_NORMAL, R.style.BLACK_DIALOG)
-//        }else {
-//            setStyle(DialogFragment.STYLE_NORMAL, R.style.MY_DIALOG)
+        if (mIsBlackBackground) {
+            setStyle(STYLE_NORMAL, R.style.BLACK_DIALOG)
+        }else {
+            setStyle(STYLE_NORMAL, R.style.MY_DIALOG)
         }
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-//        activity!!.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//        activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//        activity!!.window.statusBarColor = ContextCompat.getColor(context!!, R.color.cl_transparent)
         return inflater.inflate(R.layout.loader_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        getDialog().getWindow()
-//                .getAttributes().windowAnimations = R.style.DialogAnimation;
     }
 
     override fun onStart() {

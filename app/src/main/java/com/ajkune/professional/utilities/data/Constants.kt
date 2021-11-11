@@ -7,7 +7,7 @@ import kotlin.concurrent.timerTask
 object Constants {
 
     //dev url
-    val baseUrl : String = "https://sciencescope-api.azurewebsites.net/api/"
+    val baseUrl : String = "http://45.77.54.158/api/"
 
     fun dpToPx(dp: Int): Int {
         return (dp * Resources.getSystem().displayMetrics.density).toInt()

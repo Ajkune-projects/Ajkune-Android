@@ -7,12 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cl_transparent_black">#88000000</color>
     <color name="cl_transparent">#00000000</color>
 
 
     <color name="cl_a8466f">#a8466f</color>
     <color name="cl_37474f">#37474f</color>
     <color name="cl_8c93a9">#8c93a9</color>
+
 
 
 </resources>

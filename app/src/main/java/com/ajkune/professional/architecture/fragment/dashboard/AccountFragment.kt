@@ -1,5 +1,6 @@
 package com.ajkune.professional.architecture.fragment.dashboard
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.ajkune.professional.R
+import com.ajkune.professional.architecture.activities.OnBoardingActivity
 import com.ajkune.professional.architecture.viewmodels.dashboard.AccountViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.AccountFragmentBinding
+import com.ajkune.professional.utilities.helpers.BaseAccountManager
 import javax.inject.Inject
 
 class AccountFragment : BaseFragment() {
@@ -20,6 +23,9 @@ class AccountFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
+
+    @Inject
+    lateinit var baseAccountManager : BaseAccountManager
 
     companion object {
         fun newInstance() = AccountFragment()
@@ -49,6 +55,13 @@ class AccountFragment : BaseFragment() {
     }
 
     override fun onClickEvents() {
+        binding.btnLogOut.setOnClickListener {
+            baseAccountManager.delete()
+            val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            activity?.finish()
+        }
     }
 
     override fun setToolbar() {
