@@ -6,6 +6,7 @@ import com.ajkune.professional.utilities.helpers.BaseAccountManager
 import com.ajkune.professional.utilities.helpers.NetworkUtil
 import com.google.gson.Gson
 import okhttp3.*
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import javax.inject.Inject
@@ -115,6 +116,15 @@ data class HttpResponse (val call: Call?, val response: Response?, val error: IO
     fun getDataString() : String {
         return try {
             JSONObject(iResponse).toString()
+        }
+        catch (ex: Exception) {
+            ""
+        }
+    }
+
+    fun getJsonArray() : String {
+        return try {
+            JSONArray(iResponse).toString()
         }
         catch (ex: Exception) {
             ""
