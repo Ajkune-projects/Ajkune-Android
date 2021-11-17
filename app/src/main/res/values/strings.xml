@@ -19,4 +19,7 @@
     <string name="ajkunes_products">Ajkunes’ products</string>
     <string name="categories">Categories</string>
     <string name="price">%1$s CHF</string>
+    <string name="profile">Profile</string>
+    <string name="language">Language</string>
+    <string name="log_out">Log out</string>
 </resources>

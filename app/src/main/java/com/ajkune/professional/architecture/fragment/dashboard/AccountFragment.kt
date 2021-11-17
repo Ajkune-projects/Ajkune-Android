@@ -55,12 +55,20 @@ class AccountFragment : BaseFragment() {
     }
 
     override fun onClickEvents() {
-        binding.btnLogOut.setOnClickListener {
+        binding.txtLogout.setOnClickListener {
             baseAccountManager.delete()
             val intent = Intent(requireContext(), OnBoardingActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             activity?.finish()
+        }
+
+        binding.txtProfile.setOnClickListener {
+
+        }
+
+        binding.txtLanguage.setOnClickListener {
+
         }
     }
 
