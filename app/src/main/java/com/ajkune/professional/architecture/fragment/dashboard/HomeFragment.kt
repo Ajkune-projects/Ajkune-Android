@@ -9,17 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.adapters.CategoryAdapter
+import com.ajkune.professional.architecture.adapters.ProductsAdapter
 import com.ajkune.professional.architecture.models.Category
+import com.ajkune.professional.architecture.models.Product
 import com.ajkune.professional.architecture.viewmodels.dashboard.HomeViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.HomeFragmentBinding
 import javax.inject.Inject
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.Listener {
 
     lateinit var binding : HomeFragmentBinding
 
@@ -28,7 +31,12 @@ class HomeFragment : BaseFragment() {
 
     lateinit var categoryAdapter: CategoryAdapter
 
+    lateinit var productsAdapter: ProductsAdapter
+
     var categories: MutableList<Category> = mutableListOf()
+
+    var products: MutableList<Product> = mutableListOf()
+
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -50,6 +58,7 @@ class HomeFragment : BaseFragment() {
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         initBaseFunctions()
         initRecyclerViewCategory()
+        initRecyclerViewProducts()
     }
 
 
@@ -57,11 +66,19 @@ class HomeFragment : BaseFragment() {
     override fun onLoad() {
 
         viewModel.getActiveCategories()
+        viewModel.getActiveProducts()
 
         viewModel.categories.observe(this, Observer {
             if (it != null) {
                 categories.addAll(it)
                 binding.rvCategory.adapter?.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.products.observe(this, Observer {
+            if (it != null) {
+                products.addAll(it)
+                binding.rvProducts.adapter?.notifyDataSetChanged()
             }
         })
     }
@@ -80,10 +97,29 @@ class HomeFragment : BaseFragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        categoryAdapter = CategoryAdapter()
+        categoryAdapter = CategoryAdapter(this)
         categoryAdapter.setData(categories)
         categoryAdapter.setHasStableIds(true)
         recyclerView.adapter = categoryAdapter
 
     }
+
+    private fun initRecyclerViewProducts(){
+        val recyclerView = binding.rvProducts
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        productsAdapter = ProductsAdapter(this)
+        productsAdapter.setData(products)
+        productsAdapter.setHasStableIds(true)
+        recyclerView.adapter = productsAdapter
+
+    }
+
+    override fun onCategoryClicked(category: Category) {
+    }
+
+    override fun onProductClicked() {
+
+    }
+
 }

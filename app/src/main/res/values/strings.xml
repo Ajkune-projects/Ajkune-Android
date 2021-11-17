@@ -18,4 +18,5 @@
     <string name="filter">Filter</string>
     <string name="ajkunes_products">Ajkunes’ products</string>
     <string name="categories">Categories</string>
+    <string name="price">%1$s CHF</string>
 </resources>

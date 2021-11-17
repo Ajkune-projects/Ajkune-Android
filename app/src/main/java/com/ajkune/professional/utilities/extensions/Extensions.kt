@@ -1,6 +1,7 @@
 package com.ajkune.professional.utilities.extensions
 
 import android.widget.ImageView
+import com.ajkune.professional.application.glide.GlideApp
 import com.bumptech.glide.request.RequestOptions
 import java.net.MalformedURLException
 import java.net.URL
@@ -109,4 +110,11 @@ val String.isUsername get() = matches("^[a-zA-Z0-9-._\"]*$".toRegex())
 
 fun Any?.isnotNull():Boolean{
     return this != null
+}
+
+fun ImageView.loadUrl(url: String) {
+    GlideApp
+        .with(context)
+        .load(url)
+        .into(this)
 }

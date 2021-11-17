@@ -16,6 +16,7 @@
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/gifs_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/home_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/item_category.xml" value="0.3625" />
+        <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/item_product.xml" value="0.5" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/loader_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/login_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/offers_fragment.xml" value="0.3625" />
@@ -23,9 +24,6 @@
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/welcome_fragment.xml" value="0.3625" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/ajkune/professional/architecture/adapters/StreamsAdapter.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

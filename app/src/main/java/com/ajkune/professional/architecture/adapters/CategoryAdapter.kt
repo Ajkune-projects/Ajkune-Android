@@ -1,7 +1,10 @@
 package com.ajkune.professional.architecture.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ajkune.professional.R
@@ -9,10 +12,14 @@ import com.ajkune.professional.architecture.models.Category
 import com.ajkune.professional.base.abstractactivity.BindableAdapter
 import com.ajkune.professional.databinding.ItemCategoryBinding
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),
+class CategoryAdapter(val listener : Listener) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),
     BindableAdapter<List<Category>> {
 
     var items: List<Category> = listOf()
+
+    var selectedPosition: Int? = null
+
+    var isFirstTime: Boolean = true
 
     override fun setData(data: List<Category>) {
         items = data
@@ -32,6 +39,14 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),
 
     override fun onBindViewHolder(holder: CategoryAdapter.ViewHolder, position: Int) {
         holder.bind(items[position], position)
+
+        if (isFirstTime){
+            if (position == 0){
+                holder.binding.txtCategoryName.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.cl_a8466f))
+                holder.binding.view.visibility = View.VISIBLE
+                isFirstTime = false
+            }
+        }
     }
 
 
@@ -42,8 +57,33 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.ViewHolder>(),
 
     inner class ViewHolder( val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(stream: Category, position: Int) {
-            binding.txtCategoryName.text = stream.name
+        @SuppressLint("NotifyDataSetChanged")
+        fun bind(category: Category, position: Int) {
+            binding.txtCategoryName.text = category.name
+
+            if (selectedPosition != null) {
+                if (selectedPosition == position) {
+                    binding.txtCategoryName.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
+                    binding.view.visibility = View.VISIBLE
+                } else {
+                    binding.txtCategoryName.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
+                    binding.view.visibility = View.INVISIBLE
+                }
+            } else {
+                binding.txtCategoryName.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
+                binding.view.visibility = View.INVISIBLE
+            }
+
+            binding.root.setOnClickListener {
+                listener.onCategoryClicked(category)
+                selectedPosition =
+                    if (selectedPosition == adapterPosition) adapterPosition else adapterPosition
+                notifyDataSetChanged()
+            }
         }
+    }
+
+    interface Listener{
+        fun onCategoryClicked(category: Category)
     }
 }
