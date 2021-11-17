@@ -53,5 +53,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setToolbar() {
+
     }
 }

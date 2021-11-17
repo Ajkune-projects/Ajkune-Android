@@ -37,6 +37,8 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     var products: MutableList<Product> = mutableListOf()
 
+    var productsByCategoryId: MutableList<Product> = mutableListOf()
+
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -58,18 +60,20 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         initBaseFunctions()
         initRecyclerViewCategory()
-        initRecyclerViewProducts()
+        initRecyclerViewProducts(products)
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onLoad() {
 
+        showLoader()
         viewModel.getActiveCategories()
         viewModel.getActiveProducts()
 
         viewModel.categories.observe(this, Observer {
             if (it != null) {
+                hideLoader()
                 categories.addAll(it)
                 binding.rvCategory.adapter?.notifyDataSetChanged()
             }
@@ -79,6 +83,15 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
             if (it != null) {
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.productsByCategoryId.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                productsByCategoryId.clear()
+                productsByCategoryId.addAll(it)
+                initRecyclerViewProducts(productsByCategoryId)
             }
         })
     }
@@ -104,7 +117,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     }
 
-    private fun initRecyclerViewProducts(){
+    private fun initRecyclerViewProducts(products: List<Product>){
         val recyclerView = binding.rvProducts
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -116,10 +129,11 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     }
 
     override fun onCategoryClicked(category: Category) {
+        showLoader()
+        viewModel.getProductsByCategoryId(category.id)
     }
 
     override fun onProductClicked() {
-
     }
 
 }

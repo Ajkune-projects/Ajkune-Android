@@ -1,10 +1,10 @@
 package com.ajkune.professional.architecture.fragment.onboarding
 
+import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
@@ -39,6 +39,7 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[WelcomeViewModel::class.java]
+        setStatusBarGradiant(requireActivity())
         initBaseFunctions()
     }
 
@@ -59,5 +60,13 @@ class WelcomeFragment : BaseFragment() {
     }
 
     override fun setToolbar() {
+    }
+
+    fun setStatusBarGradiant(activity: Activity) {
+        val window: Window = activity.window
+        val background = AppCompatResources.getDrawable(requireContext(), R.drawable.welcome_main_icon)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = activity.resources.getColor(android.R.color.transparent)
+        window.setBackgroundDrawable(background)
     }
 }

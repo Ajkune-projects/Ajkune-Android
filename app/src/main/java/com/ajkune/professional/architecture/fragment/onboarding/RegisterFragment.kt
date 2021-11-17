@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
@@ -60,5 +61,9 @@ class RegisterFragment : BaseFragment() {
     }
 
     override fun setToolbar() {
+        val window = requireActivity().window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = requireActivity().getColor(R.color.white)
 }
 }

@@ -113,4 +113,7 @@ dependencies {
 
     //Rating bar
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+
+    //Coustum Loader
+    implementation 'com.wang.avi:library:2.1.3'
 }

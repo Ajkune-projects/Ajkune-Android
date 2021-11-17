@@ -61,6 +61,10 @@ class ProductsAdapter(val listener : Listener) : RecyclerView.Adapter<ProductsAd
             binding.txtProductDescription.text = product.name
             binding.txtProductPrice.text = binding.root.context.getString(R.string.price, product.price)
             binding.ratingBar.rating = product.rating.toFloat()
+
+            binding.root.setOnClickListener {
+
+            }
         }
     }
 

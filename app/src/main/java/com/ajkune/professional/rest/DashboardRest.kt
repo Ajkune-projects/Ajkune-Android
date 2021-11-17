@@ -53,4 +53,23 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
+    fun getProductsByCategoryId(categoryId : Int, completion: (List<Product>?, Exception?) -> Unit){
+
+        val request = HttpRequest("categories/$categoryId", null, HttpRequestMethod.GET)
+
+        serviceRest.request(request){response ->
+            if (response.isHttpSuccess()){
+                val category : List<Product>?
+                try {
+                    category = Product.createArray(response.getJsonArray())
+                    completion(category, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
 }

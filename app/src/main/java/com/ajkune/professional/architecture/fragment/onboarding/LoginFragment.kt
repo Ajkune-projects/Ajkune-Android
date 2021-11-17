@@ -3,10 +3,9 @@ package com.ajkune.professional.architecture.fragment.onboarding
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -91,6 +90,10 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun setToolbar() {
+        val window = requireActivity().window
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = requireActivity().getColor(R.color.white)
     }
 
     private fun checkAllFieldsAndCallLoginService(){
