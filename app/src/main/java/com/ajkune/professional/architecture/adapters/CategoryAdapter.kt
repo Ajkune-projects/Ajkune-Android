@@ -75,7 +75,7 @@ class CategoryAdapter(val listener : Listener) : RecyclerView.Adapter<CategoryAd
             }
 
             binding.root.setOnClickListener {
-                listener.onCategoryClicked(category)
+                listener.onCategoryClicked(category,position)
                 selectedPosition =
                     if (selectedPosition == adapterPosition) adapterPosition else adapterPosition
                 notifyDataSetChanged()
@@ -84,6 +84,6 @@ class CategoryAdapter(val listener : Listener) : RecyclerView.Adapter<CategoryAd
     }
 
     interface Listener{
-        fun onCategoryClicked(category: Category)
+        fun onCategoryClicked(category: Category, position: Int)
     }
 }

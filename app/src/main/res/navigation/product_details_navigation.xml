@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_details_navigation"
+    app:startDestination="@id/productDetailsFragment2">
+
+    <fragment
+        android:id="@+id/productDetailsFragment2"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout = "@layout/product_details_fragment"/>
+</navigation>

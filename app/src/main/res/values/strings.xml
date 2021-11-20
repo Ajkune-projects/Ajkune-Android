@@ -22,4 +22,5 @@
     <string name="profile">Profile</string>
     <string name="language">Language</string>
     <string name="log_out">Log out</string>
+    <string name="specification">Specification</string>
 </resources>

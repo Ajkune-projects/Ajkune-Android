@@ -58,6 +58,11 @@ abstract class ViewModelModule {
     @ViewModelKey(AccountViewModel::class)
     abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductDetailsViewModel::class)
+    abstract fun bindProductDetailsViewModel(productDetailsViewModel: ProductDetailsViewModel): ViewModel
+
 
 
     /**baseFactory for all [ViewModel]*/

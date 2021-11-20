@@ -63,12 +63,12 @@ class ProductsAdapter(val listener : Listener) : RecyclerView.Adapter<ProductsAd
             binding.ratingBar.rating = product.rating.toFloat()
 
             binding.root.setOnClickListener {
-
+                listener.onProductClicked(product)
             }
         }
     }
 
     interface Listener{
-        fun onProductClicked()
+        fun onProductClicked(product: Product)
     }
 }

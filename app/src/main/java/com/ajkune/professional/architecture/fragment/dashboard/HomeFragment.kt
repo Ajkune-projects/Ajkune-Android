@@ -1,6 +1,7 @@
 package com.ajkune.professional.architecture.fragment.dashboard
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
+import com.ajkune.professional.architecture.activities.MainActivity
+import com.ajkune.professional.architecture.activities.ProductDetailsActivity
 import com.ajkune.professional.architecture.adapters.CategoryAdapter
 import com.ajkune.professional.architecture.adapters.ProductsAdapter
 import com.ajkune.professional.architecture.models.Category
@@ -20,6 +24,9 @@ import com.ajkune.professional.architecture.viewmodels.dashboard.HomeViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.HomeFragmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.Listener {
@@ -39,6 +46,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     var productsByCategoryId: MutableList<Product> = mutableListOf()
 
+    var isFirstTime : Boolean = true
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -58,22 +66,28 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
         initBaseFunctions()
-        initRecyclerViewCategory()
         initRecyclerViewProducts(products)
+        initRecyclerViewCategory()
     }
-
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onLoad() {
 
-        showLoader()
-        viewModel.getActiveCategories()
-        viewModel.getActiveProducts()
+        if (isFirstTime){
+            showLoader()
+            viewModel.getActiveCategories()
+            viewModel.getActiveProducts()
+            isFirstTime = false
+        }
 
         viewModel.categories.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                val allCategory = Category()
+                allCategory.name = "All Products"
+                categories.add(0,allCategory)
                 categories.addAll(it)
                 binding.rvCategory.adapter?.notifyDataSetChanged()
             }
@@ -81,8 +95,10 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
         viewModel.products.observe(this, Observer {
             if (it != null) {
+                hideLoader()
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
+                initRecyclerViewProducts(it)
             }
         })
 
@@ -128,12 +144,18 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     }
 
-    override fun onCategoryClicked(category: Category) {
+    override fun onCategoryClicked(category: Category, position: Int) {
         showLoader()
-        viewModel.getProductsByCategoryId(category.id)
+        if (position == 0 ){
+            viewModel.getActiveProducts()
+        }else{
+            viewModel.getProductsByCategoryId(category.id)
+        }
     }
 
-    override fun onProductClicked() {
+    override fun onProductClicked(product: Product) {
+        val intent = Intent(requireActivity(), ProductDetailsActivity::class.java)
+        intent.putExtra("PRODUCT_DETAILS", Gson().toJson(product))
+        startActivity(intent)
     }
-
 }
