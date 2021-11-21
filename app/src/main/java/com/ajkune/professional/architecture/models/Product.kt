@@ -13,6 +13,9 @@ class Product {
     var image : String = ""
     var status : Int = 0
 
+    @SerializedName("desc_en")
+    var descEn : String = ""
+
 
     @SerializedName("initial_price")
     var initialPrice : String = ""

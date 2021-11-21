@@ -124,7 +124,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/gordita_regular"
-                    android:text="Wirkungsweise:
+                    tools:text="Wirkungsweise:
 Volumen-Shampoo verleiht feinem und dünnen Haar Volumen und Fülle
 
 NaCI Salz Frei

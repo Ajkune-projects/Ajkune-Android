@@ -92,6 +92,7 @@ class ProductDetailsFragment : BaseFragment() {
             binding.imgProductPhoto.loadUrl(product.image)
             binding.txtPrice.text = requireContext().getString(R.string.price, product.price)
             binding.ratingBar2.rating = product.rating.toFloat()
+            binding.txtSpecificationDetails.text = product.descEn
         }
 
 
