@@ -2,6 +2,7 @@ package com.ajkune.professional.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment
 import com.ajkune.professional.architecture.viewmodels.dashboard.*
 import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
 import com.ajkune.professional.architecture.viewmodels.onboarding.RegisterViewModel
@@ -62,6 +63,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProductDetailsViewModel::class)
     abstract fun bindProductDetailsViewModel(productDetailsViewModel: ProductDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyProfileViewModel::class)
+    abstract fun bindMyProfileViewModel(myProfileViewModel: MyProfileViewModel): ViewModel
 
 
 

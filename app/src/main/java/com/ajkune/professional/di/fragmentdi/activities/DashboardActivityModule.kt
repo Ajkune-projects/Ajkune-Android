@@ -29,4 +29,7 @@ abstract class DashboardActivityModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindProductDetailsFragment(): ProductDetailsFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindMyProfileFragment(): MyProfileFragment
 }

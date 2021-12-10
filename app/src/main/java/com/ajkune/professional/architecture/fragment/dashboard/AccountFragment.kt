@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.activities.OnBoardingActivity
 import com.ajkune.professional.architecture.viewmodels.dashboard.AccountViewModel
@@ -64,7 +65,7 @@ class AccountFragment : BaseFragment() {
         }
 
         binding.txtProfile.setOnClickListener {
-
+            findNavController().navigate(R.id.action_accountFragment_to_myProfileFragment)
         }
 
         binding.txtLanguage.setOnClickListener {

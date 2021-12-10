@@ -23,4 +23,10 @@
     <string name="language">Language</string>
     <string name="log_out">Log out</string>
     <string name="specification">Specification</string>
+    <string name="choose_gender">Choose gender</string>
+    <string name="choose_date">Choose date</string>
+    <string name="phone_number">Phone number</string>
+    <string name="ajkune_camera_permission">Ajkune Professional needs permission to access camera for take photo you want to post!</string>
+    <string name="ajkune_gallery_permission">Ajkune Professional needs permission to access gallery for getting photo you want to post!</string>
+
 </resources>

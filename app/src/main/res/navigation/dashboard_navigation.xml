@@ -35,8 +35,8 @@
         android:label="AccountFragment"
         tools:layout="@layout/account_fragment">
         <action
-            android:id="@+id/action_accountFragment_self"
-            app:destination="@id/accountFragment" />
+            android:id="@+id/action_accountFragment_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -47,4 +47,9 @@
             android:name="product"
             app:argType="string"/>
     </fragment>
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment"
+        android:label="my_profile_fragment"
+        tools:layout="@layout/my_profile_fragment" />
 </navigation>
