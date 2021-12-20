@@ -13,18 +13,17 @@ import javax.inject.Inject
 
 class ServiceRest @Inject constructor(private val networkUtil: NetworkUtil, private var baseAccountManager: BaseAccountManager) {
 
-    fun request(request: HttpRequest, completion: (response: HttpResponse) -> Unit) {
+    fun request(request: HttpRequest, token : String, completion: (response: HttpResponse) -> Unit) {
 
         val client = OkHttpClient()
 
         val requestBuilder = request.getBuilder()
 
         if (baseAccountManager.isLogged()) {
-            val token = baseAccountManager.token
             requestBuilder.addHeader("Authorization", "Bearer $token")
         }
 
-        requestBuilder.addHeader("Accept", "application/json")
+        //requestBuilder.addHeader("Accept", "application/json")
 
         client.newCall(requestBuilder.build()).enqueue(object: Callback {
             override fun onFailure(call: Call?, e: IOException?) {
@@ -49,7 +48,7 @@ class ServiceRest @Inject constructor(private val networkUtil: NetworkUtil, priv
     }
 }
 
-class HttpRequest(private var url: String, param: Map<String, Any>? = null, private var method: HttpRequestMethod = HttpRequestMethod.GET) {
+class HttpRequest(private var url: String, param: Map<String, Any>? = null, private var method: HttpRequestMethod = HttpRequestMethod.GET, var isUrlFromAppointment: Boolean) {
 
     private var parameters = mapOf<String, Any>()
 
@@ -60,8 +59,13 @@ class HttpRequest(private var url: String, param: Map<String, Any>? = null, priv
     }
 
     fun getBuilder() : Request.Builder {
+        var url : String = ""
 
-        val url = Constants.baseUrl + this.url
+        url = if (!isUrlFromAppointment){
+            Constants.baseUrl + this.url
+        }else{
+            this.url
+        }
 
         val httpUrl = HttpUrl.parse(url)!!.newBuilder()
 
@@ -125,6 +129,16 @@ data class HttpResponse (val call: Call?, val response: Response?, val error: IO
     fun getJsonArray() : String {
         return try {
             JSONArray(iResponse).toString()
+        }
+        catch (ex: Exception) {
+            ""
+        }
+    }
+
+    fun getAllAppointments() : String {
+        return try {
+            val o = JSONObject(iResponse)
+            o.optString("data") ?: ""
         }
         catch (ex: Exception) {
             ""

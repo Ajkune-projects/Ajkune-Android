@@ -17,9 +17,9 @@ class UserRest @Inject constructor(@ForServiceRest private var serviceREST: Serv
 
         val params = mapOf("email" to userName, "password" to password)
 
-        val request = HttpRequest("login", params, HttpRequestMethod.POST)
+        val request = HttpRequest("login", params, HttpRequestMethod.POST,false)
 
-        serviceREST.request(request){response ->
+        serviceREST.request(request,""){response ->
             if (response.isHttpSuccess()){
                 val account : User?
                 try {
@@ -39,9 +39,9 @@ class UserRest @Inject constructor(@ForServiceRest private var serviceREST: Serv
 
         val params = mapOf("name" to firstName ,"email" to email,"password" to password)
 
-        val request = HttpRequest("register", params, HttpRequestMethod.POST)
+        val request = HttpRequest("register", params, HttpRequestMethod.POST, false)
 
-        serviceREST.request(request){response ->
+        serviceREST.request(request,""){response ->
             if (response.isHttpSuccess()){
                 val defaultResponse : DefaultResponse?
                 try {

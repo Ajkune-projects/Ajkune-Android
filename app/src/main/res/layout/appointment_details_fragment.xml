@@ -5,7 +5,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".architecture.fragment.dashboard.AppointmentFragment">
+    tools:context=".architecture.fragment.dashboard.AppointmentDetailsFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -17,19 +17,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/textView13"
+            <ImageView
+                android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/appointment"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/back_icon"
+                android:padding="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/choose_time"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:fontFamily="@font/gordita_medium"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
 
             <View
                 android:id="@+id/view4"
@@ -41,7 +54,7 @@
                 android:background="#ebf0ff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -87,34 +100,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-            <TextView
-                android:id="@+id/textView16"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAppointment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/select_a_day"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/gordita_medium"
-                android:gravity="center"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:clipToPadding="false"
+                android:paddingBottom="32dp"
+                android:layout_marginEnd="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

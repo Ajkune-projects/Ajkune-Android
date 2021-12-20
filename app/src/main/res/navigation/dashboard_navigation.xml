@@ -18,7 +18,11 @@
         android:id="@+id/appointmentFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.AppointmentFragment"
         android:label="AppointmentFragment"
-        tools:layout="@layout/appointment_fragment"/>
+        tools:layout="@layout/appointment_fragment">
+        <action
+            android:id="@+id/action_appointmentFragment_to_appointmentDetailsFragment"
+            app:destination="@id/appointmentDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gifsFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.GifsFragment"
@@ -52,4 +56,14 @@
         android:name="com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment"
         android:label="my_profile_fragment"
         tools:layout="@layout/my_profile_fragment" />
+    <fragment
+        android:id="@+id/appointmentDetailsFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.AppointmentDetailsFragment"
+        android:label="AppointmentDetailsFragment"
+        tools:layout="@layout/appointment_fragment">
+
+        <argument
+            android:name="date"
+            app:argType="string"/>
+    </fragment>
 </navigation>

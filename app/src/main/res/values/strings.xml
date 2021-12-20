@@ -28,5 +28,9 @@
     <string name="phone_number">Phone number</string>
     <string name="ajkune_camera_permission">Ajkune Professional needs permission to access camera for take photo you want to post!</string>
     <string name="ajkune_gallery_permission">Ajkune Professional needs permission to access gallery for getting photo you want to post!</string>
+    <string name="make_appointment_with_ajkune">Make appointment with Ajkune</string>
+    <string name="hello_and_welcome_to_our_scheduling_page">Hello and welcome to our scheduling page!</string>
+    <string name="select_a_day">Select a day</string>
+    <string name="choose_time">Choose time</string>
 
 </resources>

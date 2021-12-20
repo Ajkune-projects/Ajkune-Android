@@ -69,6 +69,11 @@ abstract class ViewModelModule {
     @ViewModelKey(MyProfileViewModel::class)
     abstract fun bindMyProfileViewModel(myProfileViewModel: MyProfileViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppointmentDetailsViewModel::class)
+    abstract fun bindAppointmentDetailsViewModel(appointmentDetailsViewModel: AppointmentDetailsViewModel): ViewModel
+
 
 
     /**baseFactory for all [ViewModel]*/

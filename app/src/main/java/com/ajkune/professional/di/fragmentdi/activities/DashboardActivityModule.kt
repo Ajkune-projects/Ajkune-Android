@@ -32,4 +32,7 @@ abstract class DashboardActivityModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindMyProfileFragment(): MyProfileFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindAppointmentDetailsFragment(): AppointmentDetailsFragment
 }
