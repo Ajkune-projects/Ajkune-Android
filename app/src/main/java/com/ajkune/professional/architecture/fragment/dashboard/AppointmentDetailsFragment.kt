@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.adapters.AppointmentAdapter
 import com.ajkune.professional.architecture.adapters.ProductsAdapter
-import com.ajkune.professional.architecture.models.AllAppointment
-import com.ajkune.professional.architecture.models.Appointment
-import com.ajkune.professional.architecture.models.Product
+import com.ajkune.professional.architecture.models.*
 import com.ajkune.professional.architecture.viewmodels.dashboard.AppointmentDetailsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
@@ -41,6 +39,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     var allAppointment : MutableList<AllAppointment> = mutableListOf()
 
     var selectedDate : String = ""
+    var appointmentTime : String = ""
 
     companion object {
         fun newInstance() = AppointmentDetailsFragment()
@@ -83,7 +82,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
             if (it != null) {
                 hideLoader()
                 appointmentToken = it.accessToken
-                viewModel.getAllAppointments(appointmentToken)
+                val formattedDate = selectedDate+"T00:00:00.000"
+                viewModel.getAllAppointmentByDate(appointmentToken,formattedDate)
             }
         })
 
@@ -94,6 +94,14 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                 initRecyclerViewAppointment()
 
 
+            }
+        })
+
+        viewModel.successAppointment.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                Toast.makeText(requireContext(), "Rezervimi i terminit u krye me sukses", Toast.LENGTH_LONG).show()
+                requireActivity().onBackPressed()
             }
         })
     }
@@ -110,6 +118,26 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     override fun onClickEvents() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.cvConfirmYourAppointment.setOnClickListener {
+            val appointmentBody = AppointmentBody()
+            appointmentBody.type = "appointments"
+            val formattedDate = selectedDate+"T"+appointmentTime+":00.000+01:00"
+            appointmentBody.attributes.startsAt = formattedDate
+            appointmentBody.attributes.title = "Krijimi i terminit nga android device"
+            appointmentBody.attributes.participantCount = "1"
+            val steps = Steps()
+            steps.withCustomer = true
+            steps.duration = 60
+            appointmentBody.attributes.steps.add(steps)
+            appointmentBody.relationships.merchant.data.type = "merchants"
+            appointmentBody.relationships.merchant.data.id = "49b315df-d14c-49a7-a55d-50f0b0f0d58b"
+
+            val bodyV2 = BodyV2()
+            bodyV2.data = appointmentBody
+
+            viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
         }
     }
 
@@ -137,7 +165,9 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     }
 
     override fun onAppointmentClicked(appointment: Appointment) {
-
+        binding.cvConfirmYourAppointment.visibility = View.VISIBLE
+        val appointmentStartTime = appointment.time.split(" ")
+        appointmentTime = appointmentStartTime[0]
     }
 
 }

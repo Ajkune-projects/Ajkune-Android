@@ -116,7 +116,7 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
 
     fun getAllAppointments(appointmentToken : String,completion: (List<AllAppointment>?, Exception?) -> Unit){
 
-        val request = HttpRequest("https://api.shore.com/v2/appointments", null, HttpRequestMethod.GET,true)
+        val request = HttpRequest("https://api.shore.com/v2/appointments?page%500Bnumber%500D=200&page%5Bsize%5D=1000", null, HttpRequestMethod.GET,true)
 
         serviceRest.request(request,appointmentToken){response ->
             if (response.isHttpSuccess()){
@@ -129,6 +129,40 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
                 }
             }else{
                 completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun getAppointmentByDate(appointmentToken : String, date : String,completion: (List<AllAppointment>?, Exception?) -> Unit){
+
+        val request = HttpRequest("https://api.shore.com/v2/appointments?filter[starts_at.gt]=$date", null, HttpRequestMethod.GET,true)
+
+        serviceRest.request(request,appointmentToken){response ->
+            if (response.isHttpSuccess()){
+                val allAppointment : List<AllAppointment>?
+                try {
+                    allAppointment = AllAppointment.createArray(response.getAllAppointments())
+                    completion(allAppointment, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun addNewAppointment(appointmentToken : String, appointmentBody : AppointmentBody,completion: (Boolean, Exception?) -> Unit){
+
+        val params = mapOf("data" to appointmentBody)
+        val request = HttpRequest("https://api.shore.com/v2/appointments", params, HttpRequestMethod.POST,true)
+        request.getBuilder().addHeader("Content-Type", "application/vnd.api+json")
+        serviceRest.request(request,appointmentToken){response ->
+            val success = response.isHttpSuccess()
+            if (success){
+                completion(success, null)
+            }else{
+                completion(false, response.getFError())
             }
         }
     }

@@ -22,6 +22,9 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
 
     var selectedPosition: Int? = null
 
+    var isClickedRoot : Boolean = false
+
+
     @SuppressLint("NotifyDataSetChanged")
     override fun setData(data: List<Appointment>) {
         items = data
@@ -56,54 +59,61 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
             binding.txtTime.text = appointment.time
 
 
+            for (currentAppointment in allAppointment){
+                val splitStartDate = currentAppointment.attributes?.startsAt?.split("T")
+                val startdate = splitStartDate?.get(0)
 
-                allAppointment.forEach {
+                val time = splitStartDate?.get(1)
+                val startTime = time?.take(5)
 
-                    val splitStartDate = it.attributes?.startsAt?.split("T")
-                    val startdate = splitStartDate?.get(0)
+                val splitEndDate = currentAppointment.attributes?.endsAt?.split("T")
 
-                    val time = splitStartDate?.get(1)
-                    val startTime = time?.take(5)
+                val endDate = splitEndDate?.get(1)
+                val endTime = endDate?.take(5)
 
-                    val splitEndDate = it.attributes?.endsAt?.split("T")
+                val finalTime = "$startTime - $endTime"
 
-                    val endDate = splitEndDate?.get(1)
-                    val endTime = endDate?.take(5)
+                    if (finalTime == appointment.time){
+                        appointment.isAppointmentFree = false
+                        binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_8c93a9))
+                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        break
+                    }else{
+                        appointment.isAppointmentFree = true
+                    }
+            }
 
-                    val finalTime = "$startTime - $endTime"
 
-                    if (selectedDate == startdate){
-                        if (finalTime == appointment.time){
-                            binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
-                            binding.clMain.setBackgroundResource(0)
-                        }else{
+            if (isClickedRoot){
+                if (selectedPosition != null) {
+                    if (selectedPosition == position) {
+                        if (appointment.isAppointmentFree){
+                            binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
+                        }
+                    } else {
+                        if (appointment.isAppointmentFree){
                             binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
                         }
-
+                    }
+                } else {
+                    if (appointment.isAppointmentFree){
+                        binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
+                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
                     }
                 }
-
-
-            if (selectedPosition != null) {
-                if (selectedPosition == position) {
-                    binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
-                    binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
-
-                } else {
-                    binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
-                    binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
-                }
-            } else {
-                binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
-                binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
             }
 
+
             binding.root.setOnClickListener {
-                listener.onAppointmentClicked(appointment)
-                selectedPosition =
-                    if (selectedPosition == adapterPosition) adapterPosition else adapterPosition
-                notifyDataSetChanged()
+                if (appointment.isAppointmentFree){
+                    isClickedRoot = true
+                    listener.onAppointmentClicked(appointment)
+                    selectedPosition =
+                        if (selectedPosition == adapterPosition) adapterPosition else adapterPosition
+                    notifyDataSetChanged()
+                }
             }
         }
     }

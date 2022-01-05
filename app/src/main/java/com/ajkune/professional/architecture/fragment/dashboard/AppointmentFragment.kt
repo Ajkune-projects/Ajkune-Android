@@ -72,8 +72,21 @@ class AppointmentFragment :  BaseFragment() {
             Log.i("testCalendar", "$year $month $dayOfMonth")
             val updatedMonth = month+1
 
+            var formattedMonth = ""
+            formattedMonth = if (updatedMonth.toString().length ==1){
+                "0$updatedMonth"
+            }else{
+                "$updatedMonth"
+            }
 
-            val date = "$year-$updatedMonth-08"
+            var formattedDayOfMonth = ""
+            formattedDayOfMonth = if (dayOfMonth.toString().length == 1){
+                "0$dayOfMonth"
+            }else{
+                "$dayOfMonth"
+            }
+
+            val date = "$year-$formattedMonth-$formattedDayOfMonth"
             findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date))
         }
     }

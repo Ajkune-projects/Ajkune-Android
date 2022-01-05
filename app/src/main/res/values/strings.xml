@@ -32,5 +32,6 @@
     <string name="hello_and_welcome_to_our_scheduling_page">Hello and welcome to our scheduling page!</string>
     <string name="select_a_day">Select a day</string>
     <string name="choose_time">Choose time</string>
+    <string name="confirm_your_appointment">Confirm your appointment</string>
 
 </resources>
