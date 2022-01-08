@@ -75,6 +75,10 @@ abstract class ViewModelModule {
     abstract fun bindAppointmentDetailsViewModel(appointmentDetailsViewModel: AppointmentDetailsViewModel): ViewModel
 
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(SuccessAppointmentViewModel::class)
+    abstract fun bindSuccessAppointmentViewModel(successAppointmentViewModel: SuccessAppointmentViewModel): ViewModel
 
     /**baseFactory for all [ViewModel]*/
     @Binds

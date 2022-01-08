@@ -60,10 +60,29 @@
         android:id="@+id/appointmentDetailsFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.AppointmentDetailsFragment"
         android:label="AppointmentDetailsFragment"
-        tools:layout="@layout/appointment_fragment">
+        tools:layout="@layout/appointment_details_fragment">
 
         <argument
             android:name="date"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_appointmentDetailsFragment_to_successAppointmentFragment"
+            app:destination="@id/successAppointmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successAppointmentFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.SuccessAppointmentFragment"
+        android:label="success_appointment_fragment"
+        tools:layout="@layout/success_appointment_fragment" >
+
+        <argument
+            android:name="date"
+            app:argType="string"
+            />
+
+        <argument
+            android:name="time"
+            app:argType="string"
+            />
     </fragment>
 </navigation>

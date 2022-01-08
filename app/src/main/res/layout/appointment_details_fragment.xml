@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/gordita_bold"
-                    android:text="@string/confirm_your_appointment"
+                    android:text="@string/make_appointment"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </androidx.cardview.widget.CardView>
