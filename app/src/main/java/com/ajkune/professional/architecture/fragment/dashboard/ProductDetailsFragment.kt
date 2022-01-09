@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
+import com.ajkune.professional.architecture.adapters.AppointmentAdapter
+import com.ajkune.professional.architecture.adapters.CommentsAdapter
 import com.ajkune.professional.architecture.models.Product
 import com.ajkune.professional.architecture.viewmodels.dashboard.ProductDetailsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
@@ -29,6 +34,8 @@ class ProductDetailsFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
+
+    lateinit var commentsAdapter : CommentsAdapter
 
     companion object {
         fun newInstance() = ProductDetailsFragment()
@@ -55,9 +62,23 @@ class ProductDetailsFragment : BaseFragment() {
 
     override fun onLoad() {
         initView()
+        initRecyclerViewComments()
+
+        viewModel.newComment.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                requireActivity().finish()
+            }
+        })
     }
 
     override fun onError() {
+        viewModel.error.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onClickEvents() {
@@ -71,6 +92,18 @@ class ProductDetailsFragment : BaseFragment() {
                 Uri.parse(url) // missing 'http://' will cause crashed
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
+        }
+
+        binding.btnComment.setOnClickListener {
+            if (binding.etMessageTitle.text.isNullOrBlank()){
+                Toast.makeText(requireContext(), "Please write a title",Toast.LENGTH_LONG).show()
+            }else if (binding.etMessageDescription.text.isNullOrBlank()){
+                Toast.makeText(requireContext(), "Please write a title",Toast.LENGTH_LONG).show()
+            }else{
+                val title = binding.etMessageTitle.text.toString()
+                val description = binding.etMessageDescription.text.toString()
+                viewModel.addCommentForProduct(product?.id!!, title, description)
+            }
         }
     }
 
@@ -94,7 +127,19 @@ class ProductDetailsFragment : BaseFragment() {
             binding.ratingBar2.rating = product.rating.toFloat()
             binding.txtSpecificationDetails.text = product.descEn
         }
+    }
 
+    private fun initRecyclerViewComments(){
+        val recyclerView = binding.rvComments
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        commentsAdapter = CommentsAdapter()
+        product?.comments?.let {
+            commentsAdapter.setData(it)
+        }
+        commentsAdapter.setHasStableIds(true)
+        recyclerView.adapter = commentsAdapter
 
     }
 }

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintBottom_toTopOf="@+id/btnBuyNow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -124,6 +124,11 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/gordita_regular"
+                    android:textColor="@color/cl_8c93a9"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/txtSpecification"
+                    app:layout_constraintTop_toBottomOf="@+id/txtSpecification"
                     tools:text="Wirkungsweise:
 Volumen-Shampoo verleiht feinem und dünnen Haar Volumen und Fülle
 
@@ -131,12 +136,122 @@ NaCI Salz Frei
 Durch die Verwendung eines hautfreundlichen Naturverdickers anstelle von normalen Salz wird die Haarstruktur beim Waschen geschont und die Haare werden nicht aufgeraut oder ausgetrocknet.
 
 Anwendung:
-Im feuchten Haar verteilen, leicht einmassieren und kurze Zeit einwirken lassen, ausspülen und Vorgang wiederholen, dann gut ausspülen."
-                    android:textColor="@color/cl_8c93a9"
+Im feuchten Haar verteilen, leicht einmassieren und kurze Zeit einwirken lassen, ausspülen und Vorgang wiederholen, dann gut ausspülen." />
+
+                <TextView
+                    android:id="@+id/txtWriteComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/write_a_comment"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/gordita_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtSpecificationDetails" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtWriteComment">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_firstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        app:hintTextAppearance="@style/MyHintStyle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMessageTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gordita_regular"
+                            android:hint="@string/title"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
+                            android:paddingStart="8dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="12dp"
+                            android:paddingBottom="10dp"
+                            android:singleLine="true"
+                            android:textColor="#221f1f"
+                            android:textColorHint="#37474f"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/review_comment"
+                    android:textColor="#37474f"
+                    android:fontFamily="@font/gordita_regular"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtSpecification"
-                    app:layout_constraintTop_toBottomOf="@+id/txtSpecification" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+                <EditText
+                    android:id="@+id/etMessageDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:ems="10"
+                    android:gravity="start"
+                    android:hint="@string/comment_dots"
+                    android:textColor="#221f1f"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/gordita_regular"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintEnd_toEndOf="@+id/textView24"
+                    app:layout_constraintStart_toStartOf="@+id/textView24"
+                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                <Button
+                    android:id="@+id/btnComment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/comment"
+                    android:background="@drawable/border_radius_6_cl_a8466f"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/gordita_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etMessageDescription" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingBottom="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnComment" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -149,11 +264,12 @@ Im feuchten Haar verteilen, leicht einmassieren und kurze Zeit einwirken lassen,
             android:layout_marginBottom="8dp"
             android:background="@drawable/border_radius_6_cl_a8466f"
             android:fontFamily="@font/gordita_bold"
-            android:text="Buy this product"
+            android:text="@string/buy_this_product"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

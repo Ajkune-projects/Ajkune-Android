@@ -20,5 +20,8 @@ class UserByIdInfo {
     @SerializedName("date_of_birth")
     var dateOfBirth: Int = 0
 
+    @SerializedName("image_name")
+    var imageName: String? = null
+
 
 }

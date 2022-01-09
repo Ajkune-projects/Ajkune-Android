@@ -49,6 +49,27 @@ class DashboardActivity : BaseActivity() {
         initBaseFunctions()
     }
 
+    fun openHomeFragment(){
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?
+        NavigationUI.setupWithNavController(
+            binding.dashboardNavigationView,
+            navHostFragment!!.navController
+        )
+        navHostFragment.navController.navigate(R.id.homeFragment)
+        changeBottomFocusScreen("HomeFragment")
+    }
+
+    fun openOfferFragment(){
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?
+        NavigationUI.setupWithNavController(
+            binding.dashboardNavigationView,
+            navHostFragment!!.navController
+        )
+        navHostFragment.navController.navigate(R.id.offersFragment)
+        changeBottomFocusScreen("OffersFragment")
+    }
 
     private fun setupNavigation(){
         val navHostFragment = supportFragmentManager

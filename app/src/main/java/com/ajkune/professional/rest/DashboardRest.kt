@@ -91,6 +91,26 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
+    fun filterOffers(minPrice : Int, maxPrice : Int, type : String, completion: (List<Offer>?, Exception?) -> Unit){
+
+        val request = HttpRequest("filter/$minPrice/$maxPrice/$type", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request, baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val offer : List<Offer>?
+                try {
+                    offer = Offer.createArray(response.getJsonArray())
+                    completion(offer, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+
     fun getUserById(completion: (UserById?, Exception?) -> Unit){
         val token = baseAccountManager.token!!
         val params = mapOf("token" to token)
@@ -205,4 +225,37 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
-}
+    fun addCommentForProduct(productId : Int, title : String, comment : String,completion: (Boolean?, Exception?) -> Unit){
+
+        val params = mapOf("product_id" to productId, "title" to title, "comment" to comment)
+        val request = HttpRequest("comment/new", params, HttpRequestMethod.POST,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            val success = response.isHttpSuccess()
+            if (success){
+                completion(success, null)
+            }else{
+                completion(false, response.getFError())
+            }
+         }
+        }
+
+    fun getAllOffers(completion: (List<Offer>?, Exception?) -> Unit){
+
+        val request = HttpRequest("offers", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val offer : List<Offer>?
+                try {
+                    offer = Offer.createArray(response.getJsonArray())
+                    completion(offer, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+    }

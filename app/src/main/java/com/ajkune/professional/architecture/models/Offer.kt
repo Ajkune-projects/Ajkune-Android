@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 
-class Product {
+class Offer {
 
     var id : Int = 0
     var name : String = ""
@@ -16,25 +16,24 @@ class Product {
     @SerializedName("desc_en")
     var descEn : String = ""
 
-
     @SerializedName("initial_price")
     var initialPrice : String = ""
 
     @SerializedName("wp_product_url")
     var wpProductUrl : String = ""
 
-    var comments : List<Comment>? = null
+    @SerializedName("comments_offer")
+    var commentsOffer : List<Comment>? = null
 
     companion object {
-        fun create(string: String): Product? {
-            return Gson().fromJson(string, Product::class.java)
+        fun create(string: String): Offer? {
+            return Gson().fromJson(string, Offer::class.java)
         }
 
-        fun createArray(string: String): List<Product>? {
-            return Gson().fromJson<List<Product>>(
-                string, object : TypeToken<List<Product>>() {}.type
+        fun createArray(string: String): List<Offer>? {
+            return Gson().fromJson<List<Offer>>(
+                string, object : TypeToken<List<Offer>>() {}.type
             )
         }
     }
-
 }

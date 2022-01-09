@@ -73,66 +73,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="24dp"
                             android:layout_marginEnd="32dp"
+                            android:layout_marginBottom="24dp"
                             android:fontFamily="@font/gordita_bold"
                             android:text="Super flash sale 20% off"
                             android:textColor="@color/white"
                             android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardView"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginStart="16dp"
-                            app:cardCornerRadius="6dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                            app:layout_constraintStart_toEndOf="@+id/cardView"
-                            app:layout_constraintTop_toTopOf="@+id/cardView"
-                            app:srcCompat="@drawable/two_dots"
-                            app:tint="@color/white" />
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardView2"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginStart="4dp"
-                            app:cardCornerRadius="6dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                            app:layout_constraintStart_toEndOf="@+id/imageView6"
-                            app:layout_constraintTop_toTopOf="@+id/cardView" />
-
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/cardView2"
-                            app:layout_constraintStart_toEndOf="@+id/cardView2"
-                            app:layout_constraintTop_toTopOf="@+id/cardView2"
-                            app:srcCompat="@drawable/two_dots"
-                            app:tint="@color/white" />
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_marginStart="4dp"
-                            app:cardCornerRadius="4dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/cardView2"
-                            app:layout_constraintStart_toEndOf="@+id/imageView7"
-                            app:layout_constraintTop_toTopOf="@+id/cardView2" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 

@@ -25,6 +25,8 @@ class FilterProductsFragment : BaseFragment() {
 
     var type : String = "product"
 
+    var currentType : String = "product"
+
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
 
@@ -47,6 +49,7 @@ class FilterProductsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
         viewModel = ViewModelProvider(this,viewModelFactory)[FilterProductsViewModel::class.java]
+        getData()
         initBaseFunctions()
     }
 
@@ -64,12 +67,24 @@ class FilterProductsFragment : BaseFragment() {
             startPrice = minValue.toInt()
             endPrice = maxValue.toInt()
         }
+
+        if (type == "offer"){
+            binding.clFilterOffers.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
+            binding.clFilterProducts.setBackgroundResource(R.drawable.border_radius_6_cl_8c93a9)
+            binding.txtFilterOffers.setTextColor(requireContext().getColor(R.color.white))
+            binding.txtFilterProduct.setTextColor(requireContext().getColor(R.color.cl_354044))
+        }
     }
 
     override fun onError() {
     }
 
     override fun onClickEvents() {
+
+        binding.clFilterProducts.setOnClickListener {
+
+        }
+
 
         binding.clFilterProducts.setOnClickListener {
             type = "product"
@@ -91,12 +106,27 @@ class FilterProductsFragment : BaseFragment() {
         }
 
         binding.btnDone.setOnClickListener {
-            findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToHomeFragment(startPrice,endPrice,type))
+            if (type == "product"){
+                findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToHomeFragment(startPrice,endPrice,type))
+            }else{
+                findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToOffersFragment(startPrice,endPrice,type))
+            }
         }
     }
 
     override fun setToolbar() {
 
+    }
+
+    private fun getData() {
+        arguments?.let { bundle ->
+            FilterProductsFragmentArgs.fromBundle(bundle).let {
+                if (it.sortType != ""){
+                   type = it.sortType
+                }
+
+            }
+        }
     }
 
 }

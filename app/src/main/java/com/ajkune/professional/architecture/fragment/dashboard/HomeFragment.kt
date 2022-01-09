@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
+import com.ajkune.professional.architecture.activities.DashboardActivity
 import com.ajkune.professional.architecture.activities.MainActivity
 import com.ajkune.professional.architecture.activities.ProductDetailsActivity
 import com.ajkune.professional.architecture.adapters.CategoryAdapter
@@ -145,7 +146,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     override fun onClickEvents() {
         binding.txtFilter.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_filterProductsFragment)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFilterProductsFragment("product"))
         }
     }
 
@@ -197,6 +198,9 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                     minPrice = it.minPrice
                     maxPrice = it.maxPrice
                     type = it.type
+                    if (type == "offer"){
+                        (activity as DashboardActivity).openOfferFragment()
+                    }
                 }
 
             }
