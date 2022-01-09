@@ -15,14 +15,18 @@ import com.ajkune.professional.base.abstractactivity.BindableAdapter
 import com.ajkune.professional.databinding.ItemCategoryBinding
 import com.ajkune.professional.databinding.ItemChooseAppointmentBinding
 
-class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllAppointment>,var  selectedDate : String) : RecyclerView.Adapter<AppointmentAdapter.ViewHolder>(),
+class AppointmentAdapter(
+    val listener: Listener,
+    var allAppointment: List<AllAppointment>,
+    var selectedDate: String
+) : RecyclerView.Adapter<AppointmentAdapter.ViewHolder>(),
     BindableAdapter<List<Appointment>> {
 
     var items: List<Appointment> = listOf()
 
     var selectedPosition: Int? = null
 
-    var isClickedRoot : Boolean = false
+    var isClickedRoot: Boolean = false
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -33,13 +37,15 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
 
     override fun getItemCount() = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AppointmentAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: ItemChooseAppointmentBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.item_choose_appointment, parent, false)
         return ViewHolder(binding)
     }
-
 
 
     override fun onBindViewHolder(holder: AppointmentAdapter.ViewHolder, position: Int) {
@@ -52,14 +58,14 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
     }
 
 
-    inner class ViewHolder( val binding: ItemChooseAppointmentBinding) :
+    inner class ViewHolder(val binding: ItemChooseAppointmentBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged")
         fun bind(appointment: Appointment, position: Int) {
             binding.txtTime.text = appointment.time
 
 
-            for (currentAppointment in allAppointment){
+            for (currentAppointment in allAppointment) {
                 val splitStartDate = currentAppointment.attributes?.startsAt?.split("T")
                 val startdate = splitStartDate?.get(0)
 
@@ -73,33 +79,93 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
 
                 val finalTime = "$startTime - $endTime"
 
-                    if (finalTime == appointment.time){
-                        appointment.isAppointmentFree = false
-                        binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_8c93a9))
-                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
-                        break
-                    }else{
-                        appointment.isAppointmentFree = true
+                if (!appointment.checkAppointment) {
+                    binding.txtTime.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cl_8c93a9
+                        )
+                    )
+                    binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                }
+
+
+                if (startTime == appointment.time.split(" ")[0]) {
+                    when (currentAppointment.attributes!!.steps?.get(0)?.duration) {
+                        60 -> {
+                            appointment.isAppointmentFree = false
+                            appointment.checkAppointment = false
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_8c93a9
+                                )
+                            )
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        }
+                        120 -> {
+                            appointment.isAppointmentFree = false
+                            items[position + 1].isAppointmentFree = false
+                            items[position + 1].checkAppointment = false
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_8c93a9
+                                )
+                            )
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        }
+                        180 -> {
+                            appointment.isAppointmentFree = false
+                            items[position + 1].isAppointmentFree = false
+                            items[position + 1].checkAppointment = false
+                            items[position + 2].isAppointmentFree = false
+                            items[position + 2].checkAppointment = false
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_8c93a9
+                                )
+                            )
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+
+                        }
                     }
+                }
             }
 
 
-            if (isClickedRoot){
+            if (isClickedRoot) {
                 if (selectedPosition != null) {
                     if (selectedPosition == position) {
-                        if (appointment.isAppointmentFree){
-                            binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                        if (appointment.isAppointmentFree) {
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.white
+                                )
+                            )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
                         }
                     } else {
-                        if (appointment.isAppointmentFree){
-                            binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
+                        if (appointment.isAppointmentFree) {
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_a8466f
+                                )
+                            )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
                         }
                     }
                 } else {
-                    if (appointment.isAppointmentFree){
-                        binding.txtTime.setTextColor(ContextCompat.getColor(binding.root.context, R.color.cl_a8466f))
+                    if (appointment.isAppointmentFree) {
+                        binding.txtTime.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cl_a8466f
+                            )
+                        )
                         binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
                     }
                 }
@@ -107,7 +173,7 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
 
 
             binding.root.setOnClickListener {
-                if (appointment.isAppointmentFree){
+                if (appointment.isAppointmentFree) {
                     isClickedRoot = true
                     listener.onAppointmentClicked(appointment)
                     selectedPosition =
@@ -118,7 +184,7 @@ class AppointmentAdapter(val listener : Listener, var allAppointment : List<AllA
         }
     }
 
-    interface Listener{
+    interface Listener {
         fun onAppointmentClicked(appointment: Appointment)
     }
 }

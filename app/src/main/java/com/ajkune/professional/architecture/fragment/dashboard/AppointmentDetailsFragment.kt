@@ -182,7 +182,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         steps.duration = 60
                         appointmentBody.attributes.steps.add(steps)
                         appointmentBody.relationships.merchant.data.type = "merchants"
-                        appointmentBody.relationships.merchant.data.id = "49b315df-d14c-49a7-a55d-50f0b0f0d58b"
+                        appointmentBody.relationships.merchant.data.id = "2e4e05ba-3c28-48f9-a69a-51161ed44d80"
 
                         val bodyV2 = BodyV2()
                         bodyV2.data = appointmentBody

@@ -95,7 +95,7 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
 
     fun getAppointmentToken(completion: (AppointmentToken?, Exception?) -> Unit){
 
-        val params = mapOf("grant_type" to "password", "username" to "elysgroupdev@gmail.com", "password" to "elysgroupdev1")
+        val params = mapOf("grant_type" to "password", "username" to "fisniknberisha@gmail.com", "password" to "Fisnik@1")
 
         val request = HttpRequest("https://api.shore.com/v2/tokens", params, HttpRequestMethod.POST,true)
 

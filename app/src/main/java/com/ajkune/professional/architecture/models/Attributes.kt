@@ -9,4 +9,6 @@ class Attributes {
 
     @SerializedName("ends_at")
     var endsAt : String = ""
+
+    var steps : List<Steps>? = null
 }
