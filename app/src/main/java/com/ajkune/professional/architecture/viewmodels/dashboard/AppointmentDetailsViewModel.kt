@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class AppointmentDetailsViewModel @Inject constructor(val dashboardRest: DashboardRest): ViewModel() {
 
+    var settings = MutableLiveData<Settings>()
     var appointmentToken = MutableLiveData<AppointmentToken>()
     val allAppointments = SingleLiveData<List<AllAppointment>>()
     var successAppointment = SingleLiveData<Boolean>()
@@ -20,8 +21,19 @@ class AppointmentDetailsViewModel @Inject constructor(val dashboardRest: Dashboa
     var errorV2 = MutableLiveData<String>()
 
 
-    fun getAppointmentToken(){
-        dashboardRest.getAppointmentToken(){appointmentToken , exception ->
+    fun getSettings(){
+        dashboardRest.getSettings(){settings , exception ->
+            if (settings != null){
+                this.settings.postValue(settings)
+            }
+            if (exception != null){
+                error.postValue(exception)
+            }
+        }
+    }
+
+    fun getAppointmentToken(username : String, password : String){
+        dashboardRest.getAppointmentToken(username, password){appointmentToken , exception ->
             if (appointmentToken != null){
                 this.appointmentToken.postValue(appointmentToken)
             }

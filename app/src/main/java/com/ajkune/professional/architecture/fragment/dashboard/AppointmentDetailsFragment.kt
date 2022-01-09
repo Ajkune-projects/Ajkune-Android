@@ -45,6 +45,9 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
     private var dialog: AppointmentMessageDialog? = null
 
+    var customerId : String = ""
+    var merchantId : String = ""
+
     companion object {
         fun newInstance() = AppointmentDetailsFragment()
     }
@@ -81,11 +84,18 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
 
         showLoader()
-        viewModel.getAppointmentToken()
+        viewModel.getSettings()
+
+        viewModel.settings.observe(this, Observer {
+            if (it != null) {
+                customerId = it.customerId
+                merchantId = it.merchantId
+                viewModel.getAppointmentToken("fisnik@innosolutions.io","Fisnik@1")
+            }
+        })
 
         viewModel.appointmentToken.observe(this, Observer {
             if (it != null) {
-                hideLoader()
                 appointmentToken = it.accessToken
                 val formattedDate = selectedDate+"T00:00:00.000"
                 viewModel.getAllAppointmentByDate(appointmentToken,formattedDate)
@@ -182,6 +192,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         steps.duration = 60
                         appointmentBody.attributes.steps.add(steps)
                         appointmentBody.relationships.merchant.data.type = "merchants"
+                        //kena me zavendsu me dinamike
                         appointmentBody.relationships.merchant.data.id = "2e4e05ba-3c28-48f9-a69a-51161ed44d80"
 
                         val bodyV2 = BodyV2()

@@ -43,6 +43,8 @@ class ServiceRest @Inject constructor(private val networkUtil: NetworkUtil, priv
                 Log.e("REST_CODE",response?.code().toString())
 
                 completion(httpResponse)
+
+                println("Response $response")
             }
         })
     }

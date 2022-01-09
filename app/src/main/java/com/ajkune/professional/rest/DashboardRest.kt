@@ -93,7 +93,26 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
-    fun getAppointmentToken(completion: (AppointmentToken?, Exception?) -> Unit){
+    fun getSettings(completion: (Settings?, Exception?) -> Unit){
+
+        val request = HttpRequest("settings", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val settings : Settings?
+                try {
+                    settings = Settings.create(response.getDataString())
+                    completion(settings, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun getAppointmentToken(username : String, password : String,completion: (AppointmentToken?, Exception?) -> Unit){
 
         val params = mapOf("grant_type" to "password", "username" to "fisniknberisha@gmail.com", "password" to "Fisnik@1")
 
