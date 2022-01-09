@@ -2,6 +2,7 @@ package com.ajkune.professional.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ajkune.professional.architecture.fragment.dashboard.FilterProductsViewModel
 import com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment
 import com.ajkune.professional.architecture.viewmodels.dashboard.*
 import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
@@ -79,6 +80,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SuccessAppointmentViewModel::class)
     abstract fun bindSuccessAppointmentViewModel(successAppointmentViewModel: SuccessAppointmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FilterProductsViewModel::class)
+    abstract fun bindFilterProductsViewModel(filterProductsViewModel: FilterProductsViewModel): ViewModel
 
     /**baseFactory for all [ViewModel]*/
     @Binds

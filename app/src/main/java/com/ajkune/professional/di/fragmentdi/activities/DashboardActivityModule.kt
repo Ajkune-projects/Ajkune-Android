@@ -39,4 +39,7 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindSuccessAppointmentFragment(): SuccessAppointmentFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindFilterProductsFragment(): FilterProductsFragment
+
 }

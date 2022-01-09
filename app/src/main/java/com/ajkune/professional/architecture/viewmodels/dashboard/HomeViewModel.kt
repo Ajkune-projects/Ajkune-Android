@@ -15,6 +15,7 @@ class HomeViewModel @Inject constructor(private val dashboardRest: DashboardRest
     val categories = SingleLiveData<List<Category>>()
     val products = SingleLiveData<List<Product>>()
     val productsByCategoryId = SingleLiveData<List<Product>>()
+    val filterProductOrOffers = SingleLiveData<List<Product>>()
     var error = MutableLiveData<Exception>()
 
     fun getActiveCategories(){
@@ -43,6 +44,17 @@ class HomeViewModel @Inject constructor(private val dashboardRest: DashboardRest
         dashboardRest.getProductsByCategoryId(categoryId){products, exception ->
             if (products !=null){
                 this.productsByCategoryId.postValue(products)
+            }
+            if (exception !=null){
+                error.postValue(exception)
+            }
+        }
+    }
+
+    fun filterProductsOrOffers(minPrice : Int, maxPrice : Int, type : String){
+        dashboardRest.filterProductsOrOffers(minPrice,maxPrice,type){products, exception ->
+            if (products !=null){
+                this.filterProductOrOffers.postValue(products)
             }
             if (exception !=null){
                 error.postValue(exception)

@@ -37,52 +37,30 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView5"
-                    app:srcCompat="@drawable/search_icon" />
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:spinnerMode="dropdown"
-                    android:dropDownWidth="match_parent"
-                    android:layout_marginTop="27dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/txtFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/gordita_bold"
                     android:text="@string/filter"
                     android:textAllCaps="true"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/gordita_bold"
                     android:textColor="@color/cl_a8466f"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinner"
+                    android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/spinner" />
+                    app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView3"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="26dp"
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner">
+                    app:layout_constraintTop_toBottomOf="@+id/textView5">
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout

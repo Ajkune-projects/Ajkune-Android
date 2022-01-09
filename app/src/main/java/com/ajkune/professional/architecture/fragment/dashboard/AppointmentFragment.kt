@@ -58,9 +58,7 @@ class AppointmentFragment :  BaseFragment() {
     override fun onLoad() {
         calendarView = binding.calendarView// get the reference of CalendarView
 
-        //calendarView.minDate = calendarView.date
-
-
+        calendarView.minDate = calendarView.date
     }
 
     override fun onError() {

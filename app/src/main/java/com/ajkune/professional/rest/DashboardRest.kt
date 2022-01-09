@@ -72,6 +72,25 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
+    fun filterProductsOrOffers(minPrice : Int, maxPrice : Int, type : String, completion: (List<Product>?, Exception?) -> Unit){
+
+        val request = HttpRequest("filter/$minPrice/$maxPrice/$type", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request, baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val category : List<Product>?
+                try {
+                    category = Product.createArray(response.getJsonArray())
+                    completion(category, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
     fun getUserById(completion: (UserById?, Exception?) -> Unit){
         val token = baseAccountManager.token!!
         val params = mapOf("token" to token)

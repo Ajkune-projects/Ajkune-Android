@@ -120,4 +120,7 @@ dependencies {
     //Image Picker
     implementation 'com.github.esafirm.android-image-picker:imagepicker:2.2.0'
     implementation 'com.github.esafirm.android-image-picker:rximagepicker:2.2.0'
+
+    //Range SeekBar
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
 }

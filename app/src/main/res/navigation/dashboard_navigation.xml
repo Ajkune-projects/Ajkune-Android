@@ -13,6 +13,25 @@
         <action
             android:id="@+id/action_homeFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_filterProductsFragment"
+            app:destination="@id/filterProductsFragment" />
+
+        <argument
+            android:name="minPrice"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+        <argument
+            android:name="maxPrice"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+        <argument
+            android:name="type"
+            android:defaultValue=""
+            app:argType="string"/>
+
     </fragment>
     <fragment
         android:id="@+id/appointmentFragment"
@@ -84,5 +103,17 @@
             android:name="time"
             app:argType="string"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/filterProductsFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.FilterProductsFragment"
+        android:label="FilterProductsFragment"
+        tools:layout="@layout/filter_products_fragment">
+        <action
+            android:id="@+id/action_filterProductsFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

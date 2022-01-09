@@ -39,5 +39,12 @@
     <string name="success">Success</string>
     <string name="back_to_appointment">Back to appointment</string>
     <string name="appointment_success_date_time">Your appointment was successfully made at %1$s from %2$s.</string>
+    <string name="filter_search">Filter search</string>
+    <string name="price_range">Price range</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="sort_by">Sort by</string>
+    <string name="products">Products</string>
+    <string name="done">Done</string>
 
 </resources>

@@ -29,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
+import kotlin.math.min
 
 class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.Listener {
 
@@ -49,6 +50,10 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
     var isFirstTime : Boolean = true
 
+    var minPrice : Int? = null
+    var maxPrice : Int? = null
+    var type : String? = null
+
     companion object {
         fun newInstance() = HomeFragment()
     }
@@ -68,6 +73,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        getData()
         initBaseFunctions()
         initRecyclerViewProducts(products)
         initRecyclerViewCategory()
@@ -76,12 +82,19 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     @SuppressLint("NotifyDataSetChanged")
     override fun onLoad() {
 
-        if (isFirstTime){
+        if (type!= null){
             showLoader()
-            viewModel.getActiveCategories()
-            viewModel.getActiveProducts()
+            viewModel.filterProductsOrOffers(minPrice!!,maxPrice!!,type!!)
             isFirstTime = false
+        }else{
+            if (isFirstTime){
+                showLoader()
+                viewModel.getActiveCategories()
+                viewModel.getActiveProducts()
+                isFirstTime = false
+            }
         }
+
 
         viewModel.categories.observe(this, Observer {
             if (it != null) {
@@ -95,6 +108,15 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         })
 
         viewModel.products.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                products.addAll(it)
+                binding.rvProducts.adapter?.notifyDataSetChanged()
+                initRecyclerViewProducts(it)
+            }
+        })
+
+        viewModel.filterProductOrOffers.observe(this, Observer {
             if (it != null) {
                 hideLoader()
                 products.addAll(it)
@@ -122,6 +144,9 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     }
 
     override fun onClickEvents() {
+        binding.txtFilter.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_filterProductsFragment)
+        }
     }
 
     override fun setToolbar() {
@@ -163,5 +188,18 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         val intent = Intent(requireActivity(), ProductDetailsActivity::class.java)
         intent.putExtra("PRODUCT_DETAILS", Gson().toJson(product))
         startActivity(intent)
+    }
+
+    private fun getData() {
+        arguments?.let { bundle ->
+            HomeFragmentArgs.fromBundle(bundle).let {
+                if (it.type != ""){
+                    minPrice = it.minPrice
+                    maxPrice = it.maxPrice
+                    type = it.type
+                }
+
+            }
+        }
     }
 }
