@@ -153,7 +153,7 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
 
     fun getAppointmentToken(username : String, password : String,completion: (AppointmentToken?, Exception?) -> Unit){
 
-        val params = mapOf("grant_type" to "password", "username" to "fisniknberisha@gmail.com", "password" to "Fisnik@1")
+        val params = mapOf("grant_type" to "password", "username" to username, "password" to password)
 
         val request = HttpRequest("https://api.shore.com/v2/tokens", params, HttpRequestMethod.POST,true)
 
@@ -225,10 +225,10 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
-    fun addCommentForProduct(productId : Int, title : String, comment : String,completion: (Boolean?, Exception?) -> Unit){
+    fun addNewAppointmentInDashboard(startTime : String, title: String,completion: (Boolean, Exception?) -> Unit){
 
-        val params = mapOf("product_id" to productId, "title" to title, "comment" to comment)
-        val request = HttpRequest("comment/new", params, HttpRequestMethod.POST,false)
+        val params = mapOf("starts_at" to startTime, "title" to title)
+        val request = HttpRequest("appointment/new", params, HttpRequestMethod.POST,false)
 
         serviceRest.request(request,baseAccountManager.token!!){response ->
             val success = response.isHttpSuccess()
@@ -236,6 +236,26 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
                 completion(success, null)
             }else{
                 completion(false, response.getFError())
+            }
+        }
+    }
+
+    fun addCommentForProduct(productId : Int, title : String, comment : String,completion: (List<Product>?, Exception?) -> Unit){
+
+        val params = mapOf("product_id" to productId, "title" to title, "comment" to comment)
+        val request = HttpRequest("comment/new", params, HttpRequestMethod.POST,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val category : List<Product>?
+                try {
+                    category = Product.createArray(response.getJsonArray())
+                    completion(category, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
             }
          }
         }

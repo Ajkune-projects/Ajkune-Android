@@ -67,7 +67,12 @@ class ProductDetailsFragment : BaseFragment() {
         viewModel.newComment.observe(this, Observer {
             if (it != null) {
                 hideLoader()
-                requireActivity().finish()
+                it[0].comments?.let { comments ->
+                    commentsAdapter.setData(comments)
+                }
+                binding.etMessageTitle.setText("")
+                binding.etMessageDescription.setText("")
+                Toast.makeText(requireContext(), "Comment added successfully",Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -100,6 +105,7 @@ class ProductDetailsFragment : BaseFragment() {
             }else if (binding.etMessageDescription.text.isNullOrBlank()){
                 Toast.makeText(requireContext(), "Please write a title",Toast.LENGTH_LONG).show()
             }else{
+                showLoader()
                 val title = binding.etMessageTitle.text.toString()
                 val description = binding.etMessageDescription.text.toString()
                 viewModel.addCommentForProduct(product?.id!!, title, description)

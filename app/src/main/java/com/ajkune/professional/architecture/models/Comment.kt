@@ -15,6 +15,12 @@ class Comment {
         fun create(string: String): Comment? {
             return Gson().fromJson(string, Comment::class.java)
         }
+
+        fun createArray(string: String): List<Comment>? {
+            return Gson().fromJson<List<Comment>>(
+                string, object : TypeToken<List<Comment>>() {}.type
+            )
+        }
     }
 
 }

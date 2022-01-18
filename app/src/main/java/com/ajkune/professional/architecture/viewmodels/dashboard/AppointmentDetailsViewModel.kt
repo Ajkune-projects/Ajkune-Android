@@ -17,6 +17,7 @@ class AppointmentDetailsViewModel @Inject constructor(val dashboardRest: Dashboa
     var appointmentToken = MutableLiveData<AppointmentToken>()
     val allAppointments = SingleLiveData<List<AllAppointment>>()
     var successAppointment = SingleLiveData<Boolean>()
+    var successAppointmentDashboard = SingleLiveData<Boolean>()
     var error = SingleLiveData<Exception>()
     var errorV2 = MutableLiveData<String>()
 
@@ -65,10 +66,10 @@ class AppointmentDetailsViewModel @Inject constructor(val dashboardRest: Dashboa
         }
     }
 
-    fun addNewAppointment(appointmentToken : String, appointmentBody: AppointmentBody){
-        dashboardRest.addNewAppointment(appointmentToken,appointmentBody){success, exception ->
+    fun addNewAppointmentInDashboard(startTime : String, title: String){
+        dashboardRest.addNewAppointmentInDashboard(startTime,title){success, exception ->
             if (success){
-                this.successAppointment.postValue(success)
+                this.successAppointmentDashboard.postValue(success)
             }
             if (exception !=null){
                 error.postValue(exception)

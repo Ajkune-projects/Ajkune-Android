@@ -90,7 +90,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
             if (it != null) {
                 customerId = it.customerId
                 merchantId = it.merchantId
-                viewModel.getAppointmentToken("fisnik@innosolutions.io","Fisnik@1")
+                viewModel.getAppointmentToken(it.username,it.password)
             }
         })
 
@@ -199,6 +199,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         bodyV2.data = appointmentBody
 
                         viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
+                        viewModel.addNewAppointmentInDashboard(formattedDate, message)
                     }
                 }
             )

@@ -129,6 +129,21 @@ class AppointmentAdapter(
                             )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
 
+                        } 240 ->{
+                        appointment.isAppointmentFree = false
+                        items[position + 1].isAppointmentFree = false
+                        items[position + 1].checkAppointment = false
+                        items[position + 2].isAppointmentFree = false
+                        items[position + 2].checkAppointment = false
+                        items[position + 3].isAppointmentFree = false
+                        items[position + 3].checkAppointment = false
+                        binding.txtTime.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cl_8c93a9
+                            )
+                        )
+                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                         }
                     }
                 }

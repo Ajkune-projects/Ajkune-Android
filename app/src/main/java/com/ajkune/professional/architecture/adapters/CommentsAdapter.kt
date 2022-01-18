@@ -60,6 +60,7 @@ class CommentsAdapter() : RecyclerView.Adapter<CommentsAdapter.ViewHolder>(),
             comment.user?.imageName?.let {
                 binding.imgUser.loadUrl(it)
             }
+            binding.txtCommentTitle.text = comment.title
             binding.txtMessageDescription.text = comment.comment
             binding.txtUserName.text = comment.user?.name
         }
