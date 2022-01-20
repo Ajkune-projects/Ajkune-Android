@@ -85,7 +85,7 @@ class AppointmentFragment :  BaseFragment() {
             }
 
             val date = "$year-$formattedMonth-$formattedDayOfMonth"
-            findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date))
+            findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date, dayOfMonth))
         }
     }
 

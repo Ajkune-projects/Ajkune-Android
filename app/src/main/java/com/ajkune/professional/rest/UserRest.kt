@@ -56,4 +56,64 @@ class UserRest @Inject constructor(@ForServiceRest private var serviceREST: Serv
         }
     }
 
+    fun forgotPassword(email : String, completion: (DefaultResponse?, Exception?) -> Unit){
+
+        val params = mapOf("email" to email)
+
+        val request = HttpRequest("forgotEmail", params, HttpRequestMethod.POST, false)
+
+        serviceREST.request(request,""){response ->
+            if (response.isHttpSuccess()){
+                val defaultResponse : DefaultResponse?
+                try {
+                    defaultResponse = DefaultResponse.create(response.getDataString())
+                    completion(defaultResponse, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun checkResetPasswordCode(finalCode: String, completion: (DefaultResponse?, Exception?) -> Unit){
+
+        val params = mapOf("code" to finalCode)
+
+        val request = HttpRequest("forgotEmail/code", params, HttpRequestMethod.POST,false)
+
+        serviceREST.request(request,""){response ->
+            if (response.isHttpSuccess()){
+                val defaultResponse : DefaultResponse?
+                try {
+                    defaultResponse = DefaultResponse.create(response.getDataString())
+                    completion(defaultResponse, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+
+    fun resetPassword(email: String, newPassword: String, confirmNewPassword : String ,resetPasswordCode : String, completion: (Boolean, Exception?) -> Unit){
+
+        val params = mapOf("email" to email, "newPassword" to newPassword, "confirmNewPassword" to confirmNewPassword, "confirmation_password" to resetPasswordCode)
+
+        val request = HttpRequest("forgotEmail/changePassword", params, HttpRequestMethod.POST, false)
+
+        serviceREST.request(request, ""){response ->
+            val success = response.isHttpSuccess()
+            if (success){
+                completion(success, null)
+            }else{
+                completion(false, response.getFError())
+            }
+        }
+
+    }
+
 }

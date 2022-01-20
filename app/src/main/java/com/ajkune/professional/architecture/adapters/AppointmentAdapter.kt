@@ -2,7 +2,6 @@ package com.ajkune.professional.architecture.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -10,15 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.models.AllAppointment
 import com.ajkune.professional.architecture.models.Appointment
-import com.ajkune.professional.architecture.models.Category
 import com.ajkune.professional.base.abstractactivity.BindableAdapter
-import com.ajkune.professional.databinding.ItemCategoryBinding
 import com.ajkune.professional.databinding.ItemChooseAppointmentBinding
+import java.util.*
 
 class AppointmentAdapter(
     val listener: Listener,
     var allAppointment: List<AllAppointment>,
-    var selectedDate: String
+    var dayOfMonth: Int
 ) : RecyclerView.Adapter<AppointmentAdapter.ViewHolder>(),
     BindableAdapter<List<Appointment>> {
 
@@ -89,6 +87,25 @@ class AppointmentAdapter(
                     binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                 }
 
+
+                //Kjo pjes tregon nese dita ka perfundu dhe ka termine te lira duhet mi ba disable te pa klikushme, ka mbet me testu per terminet gjat orarit te dites
+                val calendar: Calendar = Calendar.getInstance()
+                val currentTime: Int = calendar.get(Calendar.HOUR_OF_DAY)
+                val currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                val timeToCheck = time?.take(2)
+                if (currentDayOfMonth == dayOfMonth){
+                    if (currentTime > timeToCheck!!.toInt()) {
+                        appointment.isAppointmentFree = false
+                        binding.txtTime.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cl_8c93a9
+                            )
+                        )
+                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                    }
+                }
+             ///////////////////////
 
                 if (startTime == appointment.time.split(" ")[0]) {
                     when (currentAppointment.attributes!!.steps?.get(0)?.duration) {

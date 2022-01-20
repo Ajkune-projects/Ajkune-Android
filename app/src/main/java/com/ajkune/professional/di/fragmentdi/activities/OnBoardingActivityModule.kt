@@ -1,8 +1,6 @@
 package com.ajkune.professional.di.fragmentdi.activities
 
-import com.ajkune.professional.architecture.fragment.onboarding.LoginFragment
-import com.ajkune.professional.architecture.fragment.onboarding.RegisterFragment
-import com.ajkune.professional.architecture.fragment.onboarding.WelcomeFragment
+import com.ajkune.professional.architecture.fragment.onboarding.*
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -18,4 +16,11 @@ abstract class OnBoardingActivityModule {
 
     @ContributesAndroidInjector
     internal abstract fun bindRegisterFragment(): RegisterFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindForgotPasswordFragment(): ForgotPasswordFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun bindResetPasswordFragment(): ResetPasswordFragment
+
 }

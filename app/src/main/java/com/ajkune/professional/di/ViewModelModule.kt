@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ajkune.professional.architecture.fragment.dashboard.FilterProductsViewModel
 import com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment
 import com.ajkune.professional.architecture.viewmodels.dashboard.*
-import com.ajkune.professional.architecture.viewmodels.onboarding.LoginViewModel
-import com.ajkune.professional.architecture.viewmodels.onboarding.RegisterViewModel
-import com.ajkune.professional.architecture.viewmodels.onboarding.WelcomeViewModel
+import com.ajkune.professional.architecture.viewmodels.onboarding.*
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.di.anotation.ViewModelKey
 import com.ajkune.professional.di.fragmentdi.FragmentsViewModelModule
@@ -85,6 +83,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FilterProductsViewModel::class)
     abstract fun bindFilterProductsViewModel(filterProductsViewModel: FilterProductsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ForgotPasswordViewModel::class)
+    abstract fun bindForgotPasswordViewModel(forgotPasswordViewModel: ForgotPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResetPasswordViewModel::class)
+    abstract fun bindResetPasswordViewModel(resetPasswordViewModel: ResetPasswordViewModel): ViewModel
 
     /**baseFactory for all [ViewModel]*/
     @Binds

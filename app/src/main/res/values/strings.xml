@@ -51,7 +51,22 @@
     <string name="title">Title *</string>
     <string name="review_comment">Review comment *</string>
     <string name="comment">Comment</string>
-    <string name="comment_dots">Comment...</string>
+    <string name="comment_dots">Comment…</string>
     <string name="ajkunes_offers">Ajkunes’ offers</string>
+    <string name="check_your_email_and_we_ll_send_the_instructions">Check your email and we’ll send the instructions</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="enter_your_email_address_linked_to_your_account">Enter your email address linked to your account</string>
+    <string name="next">Next</string>
+    <string name="email_address_verification">Email address verification</string>
+    <string name="enter_the_code_you_came_from_to_receive_by_email">Enter the code you came from to receive by email</string>
+    <string name="create_new_password">Create new password</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="empty_password">Please enter your password.</string>
+    <string name="register_empty_confirm_password">Please confirm your password</string>
+    <string name="register_password_not_match">Passwords do not match.</string>
+    <string name="password_changed_successfully">Password was changed successfully</string>
+    <string name="email_not_found">Email not found</string>
 
 </resources>

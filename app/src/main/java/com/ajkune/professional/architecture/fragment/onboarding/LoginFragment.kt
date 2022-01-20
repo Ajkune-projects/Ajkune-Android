@@ -87,6 +87,10 @@ class LoginFragment : BaseFragment() {
         binding.txtRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.txtForgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
     }
 
     override fun setToolbar() {

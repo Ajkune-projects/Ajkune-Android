@@ -43,6 +43,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     var selectedDate : String = ""
     var appointmentTime : String = ""
 
+    var currentDayOfMonth : Int = 0
+
     private var dialog: AppointmentMessageDialog? = null
 
     var customerId : String = ""
@@ -153,7 +155,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        appointmentAdapter = AppointmentAdapter(this, allAppointment, selectedDate)
+        appointmentAdapter = AppointmentAdapter(this, allAppointment, currentDayOfMonth)
         appointmentAdapter.setData(appointment)
         appointmentAdapter.setHasStableIds(true)
         recyclerView.adapter = appointmentAdapter
@@ -164,6 +166,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         arguments?.let { bundle ->
             AppointmentDetailsFragmentArgs.fromBundle(bundle).let {
                 selectedDate = it.date
+                currentDayOfMonth = it.dayOfMonth
             }
         }
     }

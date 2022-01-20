@@ -103,6 +103,10 @@
         <argument
             android:name="date"
             app:argType="string"/>
+
+        <argument
+            android:name="dayOfMonth"
+            app:argType="integer"/>
         <action
             android:id="@+id/action_appointmentDetailsFragment_to_successAppointmentFragment"
             app:destination="@id/successAppointmentFragment" />
