@@ -92,9 +92,9 @@ class AppointmentAdapter(
                 val calendar: Calendar = Calendar.getInstance()
                 val currentTime: Int = calendar.get(Calendar.HOUR_OF_DAY)
                 val currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                val timeToCheck = time?.take(2)
+                val timeToCheck = appointment.time.take(2)
                 if (currentDayOfMonth == dayOfMonth){
-                    if (currentTime > timeToCheck!!.toInt()) {
+                    if (currentTime >= timeToCheck.toInt()) {
                         appointment.isAppointmentFree = false
                         binding.txtTime.setTextColor(
                             ContextCompat.getColor(
