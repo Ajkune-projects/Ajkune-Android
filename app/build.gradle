@@ -123,4 +123,6 @@ dependencies {
 
     //Range SeekBar
     implementation 'com.crystal:crystalrangeseekbar:1.1.3'
+
+    implementation 'com.github.mmoamenn:LuckyWheel_Android:0.3.0'
 }

@@ -94,6 +94,11 @@ abstract class ViewModelModule {
     @ViewModelKey(ResetPasswordViewModel::class)
     abstract fun bindResetPasswordViewModel(resetPasswordViewModel: ResetPasswordViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddAddressViewModel::class)
+    abstract fun bindAddAddressViewModel(addAddressViewModel: AddAddressViewModel): ViewModel
+
     /**baseFactory for all [ViewModel]*/
     @Binds
     abstract fun bindViewModelFactory(factory: AjkuneViewModelFactory): ViewModelProvider.Factory

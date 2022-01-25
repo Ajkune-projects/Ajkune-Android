@@ -6,8 +6,8 @@ import com.ajkune.professional.architecture.models.User
 @Dao
 interface UserDao {
 
-    @Query("SELECT * from user_table WHERE user_id LIKE :userId")
-    fun getUserById(userId: String): User
+    @Query("SELECT * from user_table WHERE id LIKE :id")
+    fun getUserById(id: Int): User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)

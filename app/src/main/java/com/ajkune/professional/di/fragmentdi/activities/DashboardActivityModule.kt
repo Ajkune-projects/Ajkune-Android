@@ -42,4 +42,7 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindFilterProductsFragment(): FilterProductsFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindAddAddressFragment(): AddAddressFragment
+
 }

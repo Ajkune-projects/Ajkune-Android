@@ -16,6 +16,8 @@ import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.AccountFragmentBinding
 import com.ajkune.professional.utilities.helpers.BaseAccountManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
 class AccountFragment : BaseFragment() {
@@ -38,6 +40,7 @@ class AccountFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
         binding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root

@@ -68,5 +68,22 @@
     <string name="register_password_not_match">Passwords do not match.</string>
     <string name="password_changed_successfully">Password was changed successfully</string>
     <string name="email_not_found">Email not found</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="other">Other</string>
+    <string name="no_added_address_yet">No added address yet!</string>
+    <string name="add_address">Add address</string>
+    <string name="edit">Edit</string>
+    <string name="your_address">Your address</string>
+    <string name="user_address">%1$s \n%2$s \n%3$s \n%4$s</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="street">Street</string>
+    <string name="country">Country</string>
+    <string name="zip_code">Zip code</string>
+    <string name="save">Save</string>
+    <string name="city">City</string>
+    <string name="take_photo">Take a photo</string>
+    <string name="choose_from_gallery">Choose From Gallery</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

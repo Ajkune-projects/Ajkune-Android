@@ -93,7 +93,11 @@
         android:id="@+id/myProfileFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.MyProfileFragment"
         android:label="my_profile_fragment"
-        tools:layout="@layout/my_profile_fragment" />
+        tools:layout="@layout/my_profile_fragment" >
+        <action
+            android:id="@+id/action_myProfileFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+    </fragment>
     <fragment
         android:id="@+id/appointmentDetailsFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.AppointmentDetailsFragment"
@@ -144,5 +148,24 @@
         <action
             android:id="@+id/action_filterProductsFragment_to_offersFragment"
             app:destination="@id/offersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.AddAddressFragment"
+        android:label="AddAddressFragment"
+        tools:layout="@layout/add_address_fragment">
+        <argument
+            android:name="street"
+            app:argType="string"/>
+        <argument
+            android:name="address"
+            app:argType="string"/>
+        <argument
+            android:name="zipcode"
+            app:argType="integer"/>
+        <argument
+            android:name="country"
+            app:argType="string"/>
+
     </fragment>
 </navigation>

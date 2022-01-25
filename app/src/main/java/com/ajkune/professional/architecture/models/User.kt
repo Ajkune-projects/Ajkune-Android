@@ -9,11 +9,21 @@ import com.google.gson.GsonBuilder
 @Entity(tableName = "user_table")
 class User {
 
-
     @PrimaryKey
-    @ColumnInfo(name = "user_id")
-    var id: String = "FISI_TEST"
+    @ColumnInfo(name = "id")
+    var id: Int = 0
 
+    @ColumnInfo(name = "name")
+    var name: String? = null
+
+    @ColumnInfo(name = "email")
+    var email: String? = null
+
+    @ColumnInfo(name = "active_profile")
+    var activeProfile: Int? = null
+
+    @ColumnInfo(name = "last_name")
+    var lastName: String? = null
 
     @ColumnInfo(name = "token")
     var token: String = ""

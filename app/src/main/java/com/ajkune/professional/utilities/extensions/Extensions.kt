@@ -1,6 +1,11 @@
 package com.ajkune.professional.utilities.extensions
 
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.ajkune.professional.application.glide.GlideApp
 import com.bumptech.glide.request.RequestOptions
 import java.net.MalformedURLException
@@ -117,4 +122,23 @@ fun ImageView.loadUrl(url: String) {
         .with(context)
         .load(url)
         .into(this)
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun View.showKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    this.requestFocus()
+    imm.showSoftInput(this, 0)
 }

@@ -22,7 +22,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".architecture.activities.DashboardActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".architecture.activities.MainActivity"
             android:exported="true">

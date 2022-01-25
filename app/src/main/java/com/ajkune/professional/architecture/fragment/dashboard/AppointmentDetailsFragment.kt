@@ -60,6 +60,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
         binding = DataBindingUtil.inflate(inflater, R.layout.appointment_details_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root
@@ -200,6 +201,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
                         val bodyV2 = BodyV2()
                         bodyV2.data = appointmentBody
+
+
 
                         viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
                         viewModel.addNewAppointmentInDashboard(formattedDate, message)

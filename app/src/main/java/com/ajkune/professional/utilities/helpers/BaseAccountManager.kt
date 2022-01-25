@@ -30,7 +30,7 @@ class BaseAccountManager @Inject constructor(private val context: Context){
 
         val shared = AppPreferences.getShared(context)
         val editor = shared.edit()
-        editor.putString(userIdKey, user.id)
+        editor.putInt(userIdKey, user.id)
         editor.putString(userTokenKey, token)
         editor.apply()
     }
@@ -49,18 +49,18 @@ class BaseAccountManager @Inject constructor(private val context: Context){
         }
         val shared = AppPreferences.getShared(context)
         val editor = shared.edit()
-        editor.putString(userIdKey, user.id)
+        editor.putInt(userIdKey, user.id)
         editor.apply()
     }
 
     fun start() {
         val shared = AppPreferences.getShared(context)
 
-        val userId = shared.getString(userIdKey, "")
+        val userId = shared.getInt(userIdKey, 0)
         val token = shared.getString(userTokenKey, null)
 
         val job = GlobalScope.launch(Dispatchers.IO, CoroutineStart.DEFAULT) {
-            user =   userDao.getUserById(userId!!)
+            user =   userDao.getUserById(userId)
             this.coroutineContext.cancel()
         }
         this.token = token

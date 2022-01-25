@@ -1,5 +1,7 @@
 package com.ajkune.professional.architecture.fragment.dashboard
 
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +14,7 @@ import com.ajkune.professional.architecture.viewmodels.dashboard.GifsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.GifsFragmentBinding
+import com.bluehomestudio.luckywheel.WheelItem
 import javax.inject.Inject
 
 class GifsFragment : BaseFragment() {
@@ -20,6 +23,9 @@ class GifsFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
+
+    val wheelItems: MutableList<WheelItem> = ArrayList()
+
 
     companion object {
         fun newInstance() = GifsFragment()
@@ -43,6 +49,7 @@ class GifsFragment : BaseFragment() {
     }
 
     override fun onLoad() {
+
     }
 
     override fun onError() {

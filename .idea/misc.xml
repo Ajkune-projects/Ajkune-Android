@@ -6,6 +6,7 @@
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_cl_8c93a9.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_cl_a8466f.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_cl_a8466f_white.xml" value="0.37864583333333335" />
+        <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_cl_c8cdd1.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_cl_opacity_a8466f_white.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/border_radius_6_white.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/drawable/circle_user_verified.xml" value="0.37864583333333335" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/activity_onboarding.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/activity_product_details.xml" value="0.3625" />
+        <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/add_address_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/appointment_details_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/appointment_fragment.xml" value="0.3484375" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/custom_navigation_bottom_layout.xml" value="0.3625" />
@@ -32,7 +34,7 @@
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/item_product.xml" value="0.5" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/loader_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/login_fragment.xml" value="0.3625" />
-        <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/my_profile_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/my_profile_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/offers_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/product_details_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Fisnik - INNO/Desktop/Ajkune/AjkuneProfessional/app/src/main/res/layout/register_fragment.xml" value="0.3625" />
