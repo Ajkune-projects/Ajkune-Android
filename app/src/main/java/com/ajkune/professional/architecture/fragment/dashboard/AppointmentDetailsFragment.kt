@@ -20,6 +20,7 @@ import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.AppointmentDetailsFragmentBinding
 import com.ajkune.professional.utilities.data.Constants
+import com.ajkune.professional.utilities.helpers.BaseAccountManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -31,6 +32,9 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
+
+    @Inject
+    lateinit var baseAccountManager : BaseAccountManager
 
     lateinit var appointmentAdapter : AppointmentAdapter
 
@@ -185,11 +189,14 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
             dialog = AppointmentMessageDialog(
                 requireContext(), object : AppointmentMessageDialog.Listener {
                     override fun onConfirmAppointmentClicked(message: String) {
+                        val fullName = baseAccountManager.user?.name  + baseAccountManager.user?.lastName
+                        val messageDescription = getString(R.string.message_description, fullName, baseAccountManager.user?.email, message)
+
                         val appointmentBody = AppointmentBody()
                         appointmentBody.type = "appointments"
                         val formattedDate = selectedDate+"T"+appointmentTime+":00.000+01:00"
                         appointmentBody.attributes.startsAt = formattedDate
-                        appointmentBody.attributes.title = message
+                        appointmentBody.attributes.title = messageDescription
                         appointmentBody.attributes.participantCount = "1"
                         val steps = Steps()
                         steps.withCustomer = true

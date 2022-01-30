@@ -67,18 +67,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/cvImageHolder" />
 
                 <TextView
-                    android:id="@+id/txtProductPrice"
+                    android:id="@+id/txtOriginalPrice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:fontFamily="@font/gordita_medium"
-                    android:textColor="@color/cl_a8466f"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/cl_868a8c"
+                    android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="@+id/txtProductDescription"
                     app:layout_constraintTop_toBottomOf="@+id/txtProductDescription"
-                    tools:text="19.90 CHF" />
+                    tools:text="25.90 CHF" />
 
                 <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/ratingBar"
@@ -90,9 +88,24 @@
                     android:progressDrawable="@drawable/star"
                     android:rating="2.5"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtProductPrice"
-                    app:layout_constraintTop_toBottomOf="@+id/txtProductPrice"
+                    app:layout_constraintStart_toStartOf="@+id/txtOriginalPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/txtOriginalPrice"
                     app:mrb_progressTint="#ffc833" />
+
+                <TextView
+                    android:id="@+id/txtCurrentPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/gordita_medium"
+                    android:textColor="@color/cl_a8466f"
+                    android:textSize="11sp"
+                    tools:text="19.90 CHF"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtOriginalPrice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtOriginalPrice"
+                    app:layout_constraintTop_toTopOf="@+id/txtOriginalPrice" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

@@ -1,6 +1,7 @@
 package com.ajkune.professional.utilities.helpers
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.ajkune.professional.architecture.db.MyDataBase
 import com.ajkune.professional.architecture.db.dao.UserDao
 import com.ajkune.professional.architecture.models.User
@@ -14,9 +15,13 @@ class BaseAccountManager @Inject constructor(private val context: Context){
 
     private  val userIdKey = "UserId"
     private  val userTokenKey = "UserToken"
+    val PREFS_FILENAME = "com.ajkune.proffesional"
+    val ADDRESS_PREFERENCES = "selected_preferences"
 
     var user : User? = null
     var token : String? = null
+
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     fun create(user : User, token: String) {
         this.user = user
@@ -66,6 +71,10 @@ class BaseAccountManager @Inject constructor(private val context: Context){
         this.token = token
 
     }
+
+    var currentUserAddress : String?
+        get() = sharedPreferences.getString(ADDRESS_PREFERENCES, null)
+        set(value) = sharedPreferences.edit().putString(ADDRESS_PREFERENCES, value).apply()
 
     fun delete() {
         //print(user?.username)

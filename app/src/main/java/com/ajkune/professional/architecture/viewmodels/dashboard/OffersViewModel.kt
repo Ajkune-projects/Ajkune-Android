@@ -13,6 +13,7 @@ import javax.inject.Inject
 class OffersViewModel @Inject constructor(val dashboardRest: DashboardRest) : ViewModel() {
 
     val offers = SingleLiveData<List<Offer>>()
+    val banners = SingleLiveData<List<Offer>>()
     val filterProductOrOffers = SingleLiveData<List<Offer>>()
     var error = MutableLiveData<Exception>()
 
@@ -32,6 +33,18 @@ class OffersViewModel @Inject constructor(val dashboardRest: DashboardRest) : Vi
         dashboardRest.filterOffers(minPrice,maxPrice,type){products, exception ->
             if (products !=null){
                 this.filterProductOrOffers.postValue(products)
+            }
+            if (exception !=null){
+                error.postValue(exception)
+            }
+        }
+    }
+
+
+    fun getBanner(){
+        dashboardRest.getBanner(){products, exception ->
+            if (products !=null){
+                this.banners.postValue(products)
             }
             if (exception !=null){
                 error.postValue(exception)

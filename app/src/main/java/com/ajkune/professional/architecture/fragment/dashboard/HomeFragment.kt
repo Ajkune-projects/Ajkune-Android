@@ -26,6 +26,7 @@ import com.ajkune.professional.architecture.viewmodels.dashboard.HomeViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.HomeFragmentBinding
+import com.ajkune.professional.utilities.extensions.loadUrl
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -85,15 +86,18 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
 
         if (type!= null){
             showLoader()
+            binding.txtCategory.visibility = View.GONE
+            binding.txtSeeAll.visibility = View.GONE
+            binding.cvBanner.visibility = View.GONE
             viewModel.filterProductsOrOffers(minPrice!!,maxPrice!!,type!!)
+            viewModel.filterProductOrOffers
             isFirstTime = false
         }else{
-            if (isFirstTime){
-                showLoader()
-                viewModel.getActiveCategories()
-                viewModel.getActiveProducts()
-                isFirstTime = false
-            }
+            showLoader()
+            viewModel.getBanner()
+            viewModel.getActiveCategories()
+            viewModel.getActiveProducts()
+            isFirstTime = false
         }
 
 
@@ -103,6 +107,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                 val allCategory = Category()
                 allCategory.name = "All Products"
                 categories.add(0,allCategory)
+                categories.clear()
                 categories.addAll(it)
                 binding.rvCategory.adapter?.notifyDataSetChanged()
             }
@@ -111,6 +116,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         viewModel.products.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                products.clear()
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewProducts(it)
@@ -120,6 +126,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         viewModel.filterProductOrOffers.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                products.clear()
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewProducts(it)
@@ -132,6 +139,19 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                 productsByCategoryId.clear()
                 productsByCategoryId.addAll(it)
                 initRecyclerViewProducts(productsByCategoryId)
+            }
+        })
+
+        viewModel.banners.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                it[0].imagePath.let {
+                    binding.imgBanner.loadUrl(it)
+                    binding.imgBanner.visibility = View.VISIBLE
+                }
+                binding.txtBannerText.text = it[0].title
+
             }
         })
     }

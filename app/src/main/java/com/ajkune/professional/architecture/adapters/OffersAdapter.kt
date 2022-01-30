@@ -1,6 +1,7 @@
 package com.ajkune.professional.architecture.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.ajkune.professional.architecture.models.Category
 import com.ajkune.professional.architecture.models.Offer
 import com.ajkune.professional.architecture.models.Product
 import com.ajkune.professional.base.abstractactivity.BindableAdapter
+import com.ajkune.professional.databinding.ItemOfferBinding
 import com.ajkune.professional.databinding.ItemProductBinding
 import com.ajkune.professional.utilities.data.Constants.dpToPx
 import com.ajkune.professional.utilities.extensions.loadUrl
@@ -31,8 +33,8 @@ class OffersAdapter(val listener : Listener) : RecyclerView.Adapter<OffersAdapte
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OffersAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemProductBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_product, parent, false)
+        val binding: ItemOfferBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.item_offer, parent, false)
         return ViewHolder(binding)
     }
 
@@ -54,13 +56,16 @@ class OffersAdapter(val listener : Listener) : RecyclerView.Adapter<OffersAdapte
     }
 
 
-    inner class ViewHolder( val binding: ItemProductBinding) :
+    inner class ViewHolder( val binding: ItemOfferBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged")
         fun bind(product: Offer, position: Int) {
+
             binding.imgProduct.loadUrl(product.image)
+            binding.txtOriginalPrice.paintFlags = binding.txtOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            binding.txtOriginalPrice.text = binding.root.context.getString(R.string.price, product.initialPrice)
+            binding.txtCurrentPrice.text = binding.root.context.getString(R.string.price, product.price)
             binding.txtProductDescription.text = product.name
-            binding.txtProductPrice.text = binding.root.context.getString(R.string.price, product.price)
             binding.ratingBar.rating = product.rating.toFloat()
 
             binding.root.setOnClickListener {

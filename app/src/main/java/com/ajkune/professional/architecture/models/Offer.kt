@@ -13,6 +13,11 @@ class Offer {
     var image : String = ""
     var status : Int = 0
 
+    //for banner
+    var title : String = ""
+    @SerializedName("image_path")
+    var imagePath : String = ""
+
     @SerializedName("desc_en")
     var descEn : String = ""
 

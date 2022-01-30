@@ -61,7 +61,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/circle_user_verified"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +71,7 @@
                     android:layout_width="95dp"
                     android:layout_height="95dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/fisi"
+                    android:src="@drawable/user_default_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +81,7 @@
 
 
             <TextView
-                android:id="@+id/txtUSerName"
+                android:id="@+id/txtUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gordita_bold"
@@ -93,7 +92,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clImgUserProfile"
                 tools:text="Filan Fisteku"
-                app:drawableEndCompat="@drawable/verified_use_icon" />
+                tools:drawableEndCompat="@drawable/verified_use_icon" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -102,8 +101,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtUSerName"
-                tools:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@+id/txtUserName">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_firstname"
@@ -140,13 +138,54 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutFirstName">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_lastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    app:endIconMode="custom"
+                    app:hintTextAppearance="@style/MyHintStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_medium"
+                        android:hint="@string/last_name"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:paddingStart="8dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="true"
+                        android:textColor="#221f1f"
+                        android:textColorHint="#37474f"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutFirstName"
-                tools:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutLastName">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_email"
@@ -171,6 +210,10 @@
                         android:inputType="textPersonName"
                         android:maxLines="1"
                         android:paddingStart="8dp"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:paddingTop="5dp"
                         android:paddingEnd="12dp"
                         android:paddingBottom="10dp"
@@ -390,7 +433,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/gordita_medium"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -427,7 +469,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -437,15 +479,15 @@
                     android:id="@+id/txtUserAddress"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    tools:text="Jane Doe \nStreet Name 930 82 \nSttutgard \nGermany"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
                     android:fontFamily="@font/gordita_regular"
                     android:lineSpacingExtra="10sp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Jane Doe \nStreet Name 930 82 \nSttutgard \nGermany" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button

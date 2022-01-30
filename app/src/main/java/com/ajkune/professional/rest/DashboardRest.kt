@@ -278,4 +278,44 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
             }
         }
     }
+
+    fun getBanner(completion: (List<Offer>?, Exception?) -> Unit){
+
+        val request = HttpRequest("banner", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val offer : List<Offer>?
+                try {
+                    offer = Offer.createArray(response.getJsonArray())
+                    completion(offer, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun verifyUserProfileV2(verifyUserAccountBody : VerifyUserAccountBody,completion: (Boolean, Exception?) -> Unit){
+
+        val params = mapOf("name" to verifyUserAccountBody.name, "last_name" to verifyUserAccountBody.lastName,
+            "gender" to verifyUserAccountBody.gender, "date_of_birth" to verifyUserAccountBody.dateOfBirth,
+            "phone" to verifyUserAccountBody.phone, "address" to verifyUserAccountBody.address,
+            "street" to verifyUserAccountBody.street, "zip_code" to verifyUserAccountBody.zipCode,
+            "country" to verifyUserAccountBody.country,
+            "base64_img" to verifyUserAccountBody.base64Img)
+
+        val request = HttpRequest("profile/verification", params, HttpRequestMethod.POST,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            val success = response.isHttpSuccess()
+            if (success){
+                completion(success, null)
+            }else{
+                completion(false, response.getFError())
+            }
+        }
+    }
     }

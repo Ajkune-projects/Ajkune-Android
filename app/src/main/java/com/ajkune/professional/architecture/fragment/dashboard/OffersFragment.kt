@@ -27,6 +27,7 @@ import com.ajkune.professional.architecture.viewmodels.dashboard.OffersViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.OffersFragmentBinding
+import com.ajkune.professional.utilities.extensions.loadUrl
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -78,19 +79,20 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
     override fun onLoad() {
         if (type!= null){
             showLoader()
+            binding.cvBanner.visibility = View.GONE
             viewModel.filterOffers(minPrice!!,maxPrice!!,type!!)
             isFirstTime = false
         }else{
-            if (isFirstTime){
-                showLoader()
-                viewModel.getAllOffers()
-                isFirstTime = false
-            }
+            showLoader()
+            viewModel.getBanner()
+            viewModel.getAllOffers()
+            isFirstTime = false
         }
 
         viewModel.offers.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                offers.clear()
                 offers.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewOffers()
@@ -100,9 +102,23 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
         viewModel.filterProductOrOffers.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                offers.clear()
                 offers.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewOffers()
+            }
+        })
+
+        viewModel.banners.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                it[0].imagePath.let {
+                    binding.imgBanner.loadUrl(it)
+                    binding.imgBanner.visibility = View.VISIBLE
+                }
+                binding.txtBannerText.text = it[0].title
+
             }
         })
     }

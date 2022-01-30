@@ -86,4 +86,9 @@
     <string name="choose_from_gallery">Choose From Gallery</string>
     <string name="cancel">Cancel</string>
 
+    <string name="message_description">Name:%1$s \n Email: %2$s \nDescription:  %3$s</string>
+    <string name="add_your_address">Add your address</string>
+    <string name="edit_your_address">Edit your address</string>
+    <string name="see_all">See all</string>
+
 </resources>

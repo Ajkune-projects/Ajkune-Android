@@ -13,10 +13,10 @@ class UserByIdInfo {
 
 
     @SerializedName("last_name")
-    var lastName: String = ""
+    var lastName: String? = null
 
     @SerializedName("profile_photo_path")
-    var profilePhotoPath: String = ""
+    var profilePhotoPath: String? = null
 
     @SerializedName("active_profile")
     var activeProfile: Int = 0

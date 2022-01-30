@@ -51,7 +51,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
+                    android:id="@+id/cvBanner"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginStart="16dp"
@@ -65,29 +65,70 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/cl_a8466f">
+                        android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/textView7"
+                        <ImageView
+                            android:id="@+id/imgBanner"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/product_icon"
+                            tools:visibility="visible" />
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginEnd="32dp"
-                            android:layout_marginBottom="24dp"
-                            android:fontFamily="@font/gordita_bold"
-                            android:text="Super flash sale 20% off"
-                            android:textColor="@color/white"
-                            android:textSize="24sp"
+                            android:layout_marginBottom="16dp"
+                            app:cardCornerRadius="6dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/txtBannerText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/gordita_bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:text="Super " />
+
+                                <TextView
+                                    android:id="@+id/txtBannerPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:fontFamily="@font/gordita_bold"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/txtBannerText"
+                                    tools:text="20.99 flash" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txtCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -97,20 +138,20 @@
                     android:fontFamily="@font/gordita_medium"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvBanner" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/txtSeeAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="See all"
+                    android:text="@string/see_all"
                     android:textColor="@color/cl_a8466f"
                     android:textSize="14sp"
                     android:fontFamily="@font/gordita_medium"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtCategory"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView8" />
+                    app:layout_constraintTop_toTopOf="@+id/txtCategory" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategory"
@@ -123,7 +164,7 @@
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProducts"
