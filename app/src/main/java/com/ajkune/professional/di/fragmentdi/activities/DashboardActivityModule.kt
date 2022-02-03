@@ -45,4 +45,7 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindAddAddressFragment(): AddAddressFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindLanguageFragment(): LanguageFragment
+
 }

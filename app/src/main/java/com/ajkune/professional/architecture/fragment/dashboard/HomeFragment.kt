@@ -90,12 +90,14 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
             binding.txtSeeAll.visibility = View.GONE
             binding.cvBanner.visibility = View.GONE
             viewModel.filterProductsOrOffers(minPrice!!,maxPrice!!,type!!)
-            viewModel.filterProductOrOffers
             isFirstTime = false
         }else{
             showLoader()
             viewModel.getBanner()
-            viewModel.getActiveCategories()
+            if (isFirstTime){
+                isFirstTime = false
+                viewModel.getActiveCategories()
+            }
             viewModel.getActiveProducts()
             isFirstTime = false
         }
@@ -107,7 +109,6 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                 val allCategory = Category()
                 allCategory.name = "All Products"
                 categories.add(0,allCategory)
-                categories.clear()
                 categories.addAll(it)
                 binding.rvCategory.adapter?.notifyDataSetChanged()
             }
@@ -130,6 +131,10 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewProducts(it)
+
+                if (products.isEmpty()){
+                    binding.cvEmptyProducts.visibility = View.VISIBLE
+                }
             }
         })
 
@@ -145,13 +150,17 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         viewModel.banners.observe(this, Observer {
             if (it != null) {
                 hideLoader()
-                binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
-                it[0].imagePath.let {
-                    binding.imgBanner.loadUrl(it)
-                    binding.imgBanner.visibility = View.VISIBLE
+                if (it.isNotEmpty()){
+                    binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                    it[0].imagePath.let {
+                        binding.imgBanner.loadUrl(it)
+                        binding.imgBanner.visibility = View.VISIBLE
+                    }
+                    binding.txtBannerText.text = it[0].title
+                    binding.cvBanner.visibility = View.VISIBLE
+                }else{
+                    binding.cvBanner.visibility = View.GONE
                 }
-                binding.txtBannerText.text = it[0].title
-
             }
         })
     }

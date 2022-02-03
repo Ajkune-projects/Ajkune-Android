@@ -111,14 +111,17 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
 
         viewModel.banners.observe(this, Observer {
             if (it != null) {
-                hideLoader()
-                binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
-                it[0].imagePath.let {
-                    binding.imgBanner.loadUrl(it)
-                    binding.imgBanner.visibility = View.VISIBLE
+                if (it.isNotEmpty()){
+                    binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                    it[0].imagePath.let {
+                        binding.imgBanner.loadUrl(it)
+                        binding.imgBanner.visibility = View.VISIBLE
+                    }
+                    binding.txtBannerText.text = it[0].title
+                    binding.cvBanner.visibility = View.VISIBLE
+                }else{
+                    binding.cvBanner.visibility = View.GONE
                 }
-                binding.txtBannerText.text = it[0].title
-
             }
         })
     }

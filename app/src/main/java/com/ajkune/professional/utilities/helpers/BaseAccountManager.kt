@@ -17,6 +17,7 @@ class BaseAccountManager @Inject constructor(private val context: Context){
     private  val userTokenKey = "UserToken"
     val PREFS_FILENAME = "com.ajkune.proffesional"
     val ADDRESS_PREFERENCES = "selected_preferences"
+    val CURRENT_LANGUAGE = "current_language"
 
     var user : User? = null
     var token : String? = null
@@ -96,4 +97,8 @@ class BaseAccountManager @Inject constructor(private val context: Context){
     fun isLogged(): Boolean {
         return user != null
     }
+
+    var language: String?
+        get() = sharedPreferences.getString(CURRENT_LANGUAGE, null)
+        set(value) = sharedPreferences.edit().putString(CURRENT_LANGUAGE, value).apply()
 }

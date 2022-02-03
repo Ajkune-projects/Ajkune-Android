@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_accountFragment_to_myProfileFragment"
             app:destination="@id/myProfileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -168,4 +171,9 @@
             app:argType="string"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.LanguageFragment"
+        android:label="LanguageFragment"
+        tools:layout="@layout/language_fragment"/>
 </navigation>

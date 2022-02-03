@@ -87,6 +87,8 @@ class MyProfileFragment : BaseFragment() {
     var zipCode = ""
     var country = ""
 
+    var isUserVerified : Boolean = false
+
     companion object {
         fun newInstance() = MyProfileFragment()
     }
@@ -183,7 +185,7 @@ class MyProfileFragment : BaseFragment() {
 
 
             if (user.lastName != null){
-                binding.txtUserName.text = user.name + user.lastName
+                binding.txtUserName.text = "${user.name} ${user.lastName}"
             }else{
                 binding.txtUserName.text = user.name
             }
@@ -197,6 +199,7 @@ class MyProfileFragment : BaseFragment() {
 
 
             if (it.user?.activeProfile == 0){
+                isUserVerified = false
                 binding.txtUserName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 binding.clImgUserProfile.setBackgroundResource(0)
                 binding.txtAddNewAddress.visibility = View.VISIBLE
@@ -218,6 +221,7 @@ class MyProfileFragment : BaseFragment() {
                     binding.txtUserAddress.text = getString(R.string.user_address, obj.street, obj.city, obj.zipCode, obj.country)
                 }
             }else{
+                isUserVerified = true
                 binding.clImgUserProfile.setBackgroundResource(R.drawable.circle_user_verified)
                 binding.txtUserName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.verified_use_icon, 0);
                 binding.txtEditAddress.visibility = View.VISIBLE
@@ -336,6 +340,12 @@ class MyProfileFragment : BaseFragment() {
             warningMessage = "Please fill all requirements Fields"
         }else if (binding.txtUserAddress.text.toString().isEmpty()) {
             warningMessage = "Please add your address"
+        }else if(!isUserVerified){
+            if (iconBytes != ""){
+                return true
+            }else{
+                warningMessage = "Please upload your profile picture"
+            }
         }
         if (warningMessage.isNotEmpty()) {
             Toast.makeText(context, warningMessage, Toast.LENGTH_SHORT).show()

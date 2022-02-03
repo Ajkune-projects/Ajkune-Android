@@ -78,20 +78,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtProductDescription"
                     tools:text="25.90 CHF" />
 
-                <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                    android:id="@+id/ratingBar"
-                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:progressDrawable="@drawable/star"
-                    android:rating="2.5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/txtOriginalPrice"
-                    app:layout_constraintTop_toBottomOf="@+id/txtOriginalPrice"
-                    app:mrb_progressTint="#ffc833" />
-
                 <TextView
                     android:id="@+id/txtCurrentPrice"
                     android:layout_width="0dp"
@@ -106,6 +92,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txtOriginalPrice"
                     app:layout_constraintTop_toTopOf="@+id/txtOriginalPrice" />
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:progressDrawable="@drawable/star"
+                    android:rating="2.5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/txtOriginalPrice"
+                    app:layout_constraintTop_toBottomOf="@+id/txtOriginalPrice"
+                    app:mrb_progressTint="#ffc833" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

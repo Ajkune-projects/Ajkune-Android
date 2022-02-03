@@ -73,7 +73,7 @@ class AccountFragment : BaseFragment() {
         }
 
         binding.txtLanguage.setOnClickListener {
-
+            findNavController().navigate(R.id.action_accountFragment_to_languageFragment)
         }
     }
 

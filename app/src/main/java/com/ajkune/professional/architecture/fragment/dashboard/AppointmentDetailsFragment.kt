@@ -79,6 +79,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     }
 
     override fun onLoad() {
+        appointment.add(Appointment("08:00 - 09:00"))
         appointment.add(Appointment("09:00 - 10:00"))
         appointment.add(Appointment("10:00 - 11:00"))
         appointment.add(Appointment("11:00 - 12:00"))
@@ -204,7 +205,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         appointmentBody.attributes.steps.add(steps)
                         appointmentBody.relationships.merchant.data.type = "merchants"
                         //kena me zavendsu me dinamike
-                        appointmentBody.relationships.merchant.data.id = "2e4e05ba-3c28-48f9-a69a-51161ed44d80"
+                        appointmentBody.relationships.merchant.data.id = "98042f81-8d99-48de-9d24-65fdc60774e7"
+                        appointmentBody.relationships.customer.data.id = "58a0c8c8-bb68-48de-bf6a-a1edb00c1d7b"
 
                         val bodyV2 = BodyV2()
                         bodyV2.data = appointmentBody
