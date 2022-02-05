@@ -338,4 +338,60 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
             }
         }
     }
+
+    fun hasGifts(completion: (HasUserGiftsResponse?, Exception?) -> Unit){
+
+        val request = HttpRequest("gift/hasGiftUser", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val userGiftsResponse : HasUserGiftsResponse?
+                try {
+                    userGiftsResponse = HasUserGiftsResponse.create(response.getDataString())
+                    completion(userGiftsResponse, null)
+                    Log.i("user", userGiftsResponse.toString())
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
     }
+
+    fun getListOfGifts(completion: (List<Gift>?, Exception?) -> Unit){
+
+        val request = HttpRequest("gift/list", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val gifs : List<Gift>?
+                try {
+                    gifs = Gift.createArray(response.getJsonArray())
+                    completion(gifs, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
+    fun addGiftFromSpinner(giftId : Int,completion: (Boolean, Exception?) -> Unit){
+
+        val params = mapOf("gift_list_id" to giftId)
+        val request = HttpRequest("gift/add", params, HttpRequestMethod.POST,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val success = response.isHttpSuccess()
+                if (success){
+                    completion(success, null)
+                }else{
+                    completion(false, response.getFError())
+                }
+            }
+        }
+    }
+}

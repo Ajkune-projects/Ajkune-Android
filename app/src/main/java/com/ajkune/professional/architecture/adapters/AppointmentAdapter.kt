@@ -11,6 +11,7 @@ import com.ajkune.professional.architecture.models.AllAppointment
 import com.ajkune.professional.architecture.models.Appointment
 import com.ajkune.professional.base.abstractactivity.BindableAdapter
 import com.ajkune.professional.databinding.ItemChooseAppointmentBinding
+import okhttp3.internal.Version
 import java.util.*
 
 class AppointmentAdapter(
@@ -120,6 +121,7 @@ class AppointmentAdapter(
                             )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                         }
+                        
                         120 -> {
                             appointment.isAppointmentFree = false
                             items[position + 1].isAppointmentFree = false
@@ -218,5 +220,12 @@ class AppointmentAdapter(
 
     interface Listener {
         fun onAppointmentClicked(appointment: Appointment)
+    }
+
+    fun test(){
+        var i = 0
+        if (i in 1..99){
+
+        }
     }
 }

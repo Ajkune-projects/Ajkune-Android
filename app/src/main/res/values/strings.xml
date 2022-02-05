@@ -96,5 +96,6 @@
     <string name="play">Play</string>
     <string name="play_lucky_wheel">Play “Lucky wheel”</string>
     <string name="lucky_wheel">Lucky wheel</string>
+    <string name="there_is_no_gift_for_you_at_the_moment">There is no gift for you at the moment</string>
 
 </resources>

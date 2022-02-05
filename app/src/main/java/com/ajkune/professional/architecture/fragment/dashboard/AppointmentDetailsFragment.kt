@@ -218,8 +218,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         val bodyV2 = BodyV2()
                         bodyV2.data = appointmentBody
 
-//                        viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
-//                        viewModel.addNewAppointmentInDashboard(formattedDate, message)
+                        viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
+                        viewModel.addNewAppointmentInDashboard(formattedDate, message)
                     }
                 }
             )

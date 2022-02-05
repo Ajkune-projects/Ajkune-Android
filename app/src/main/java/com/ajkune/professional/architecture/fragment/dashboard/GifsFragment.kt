@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.viewmodels.dashboard.GifsViewModel
@@ -53,6 +54,21 @@ class GifsFragment : BaseFragment() {
     }
 
     override fun onLoad() {
+        showLoader()
+        viewModel.hasGifts()
+
+        viewModel.hasUserGifts.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                if (it.userHasGift){
+                    binding.clPlay.visibility = View.VISIBLE
+                    binding.cvEmptyGifts.visibility = View.GONE
+                }else{
+                    binding.clPlay.visibility = View.GONE
+                    binding.cvEmptyGifts.visibility = View.VISIBLE
+                }
+            }
+        })
 
     }
 
