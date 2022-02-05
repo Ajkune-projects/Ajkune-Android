@@ -25,6 +25,9 @@ class Product {
 
     var comments : List<Comment>? = null
 
+    @SerializedName("comments_offer")
+    var commentsOffer : List<Comment>? = null
+
     companion object {
         fun create(string: String): Product? {
             return Gson().fromJson(string, Product::class.java)

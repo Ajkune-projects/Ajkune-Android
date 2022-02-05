@@ -86,12 +86,15 @@
     <string name="choose_from_gallery">Choose From Gallery</string>
     <string name="cancel">Cancel</string>
 
-    <string name="message_description">Name:%1$s \n Email: %2$s \nDescription:  %3$s</string>
+    <string name="message_description">Name: %1$s \n Email: %2$s \nDescription:  %3$s</string>
     <string name="add_your_address">Add your address</string>
     <string name="edit_your_address">Edit your address</string>
     <string name="see_all">See all</string>
     <string name="change_language">Change language</string>
     <string name="choose_language">Choose language</string>
     <string name="there_is_no_product_in_this_category">There is no product in this category!</string>
+    <string name="play">Play</string>
+    <string name="play_lucky_wheel">Play “Lucky wheel”</string>
+    <string name="lucky_wheel">Lucky wheel</string>
 
 </resources>

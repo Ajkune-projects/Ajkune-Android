@@ -260,6 +260,26 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
          }
         }
 
+    fun addCommentForOffer(productId : Int, title : String, comment : String,completion: (List<Product>?, Exception?) -> Unit){
+
+        val params = mapOf("product_id" to productId, "title" to title, "comment" to comment)
+        val request = HttpRequest("commentOffer/new", params, HttpRequestMethod.POST,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val category : List<Product>?
+                try {
+                    category = Product.createArray(response.getJsonArray())
+                    completion(category, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
+            }
+        }
+    }
+
     fun getAllOffers(completion: (List<Offer>?, Exception?) -> Unit){
 
         val request = HttpRequest("offers", null, HttpRequestMethod.GET,false)

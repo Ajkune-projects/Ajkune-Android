@@ -172,7 +172,7 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
 
     override fun onOffersClicked(product: Offer) {
         val intent = Intent(requireActivity(), ProductDetailsActivity::class.java)
-        intent.putExtra("PRODUCT_DETAILS", Gson().toJson(product))
+        intent.putExtra("OFFERS_DETAILS", Gson().toJson(product))
         startActivity(intent)
     }
 }

@@ -32,6 +32,8 @@ class ProductDetailsFragment : BaseFragment() {
 
     var product : Product? = null
 
+    var isProduct : Boolean = false
+
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
 
@@ -70,6 +72,9 @@ class ProductDetailsFragment : BaseFragment() {
                 it[0].comments?.let { comments ->
                     commentsAdapter.setData(comments)
                 }
+                it[0].commentsOffer?.let { commentsOffer ->
+                    commentsAdapter.setData(commentsOffer)
+                }
                 binding.etMessageTitle.setText("")
                 binding.etMessageDescription.setText("")
                 Toast.makeText(requireContext(), "Comment added successfully",Toast.LENGTH_LONG).show()
@@ -103,12 +108,17 @@ class ProductDetailsFragment : BaseFragment() {
             if (binding.etMessageTitle.text.isNullOrBlank()){
                 Toast.makeText(requireContext(), "Please write a title",Toast.LENGTH_LONG).show()
             }else if (binding.etMessageDescription.text.isNullOrBlank()){
-                Toast.makeText(requireContext(), "Please write a title",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Please write your comment",Toast.LENGTH_LONG).show()
             }else{
                 showLoader()
                 val title = binding.etMessageTitle.text.toString()
                 val description = binding.etMessageDescription.text.toString()
-                viewModel.addCommentForProduct(product?.id!!, title, description)
+                if (isProduct){
+                    viewModel.addCommentForProduct(product?.id!!, title, description)
+                }else{
+                    viewModel.addCommentForOffer(product?.id!!, title, description)
+                }
+
             }
         }
     }
@@ -120,6 +130,11 @@ class ProductDetailsFragment : BaseFragment() {
         activity?.intent?.let {
             if (it.getStringExtra("PRODUCT_DETAILS") != null && it.getStringExtra("PRODUCT_DETAILS") != "") {
                 product = Gson().fromJson(it.getStringExtra("PRODUCT_DETAILS"), Product::class.java)
+                isProduct = true
+            }
+            if (it.getStringExtra("OFFERS_DETAILS") != null && it.getStringExtra("OFFERS_DETAILS") != "") {
+                product = Gson().fromJson(it.getStringExtra("OFFERS_DETAILS"), Product::class.java)
+                isProduct = false
             }
         }
     }
@@ -142,6 +157,9 @@ class ProductDetailsFragment : BaseFragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         commentsAdapter = CommentsAdapter()
         product?.comments?.let {
+            commentsAdapter.setData(it)
+        }
+        product?.commentsOffer?.let {
             commentsAdapter.setData(it)
         }
         commentsAdapter.setHasStableIds(true)

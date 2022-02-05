@@ -2,6 +2,7 @@ package com.ajkune.professional.rest
 
 import android.util.Log
 import com.ajkune.professional.architecture.models.DefaultResponse
+import com.ajkune.professional.architecture.models.LoginResponse
 import com.ajkune.professional.architecture.models.User
 import com.ajkune.professional.di.anotation.ForServiceRest
 import com.ajkune.professional.di.anotation.ForUserRest
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class UserRest @Inject constructor(@ForServiceRest private var serviceREST: ServiceRest, private var baseAccountManager: BaseAccountManager) {
 
 
-    fun login(userName: String, password: String, completion: (User?, Exception?) -> Unit){
+    fun login(userName: String, password: String, completion: (LoginResponse?, Exception?) -> Unit){
 
         val params = mapOf("email" to userName, "password" to password)
 
@@ -21,9 +22,9 @@ class UserRest @Inject constructor(@ForServiceRest private var serviceREST: Serv
 
         serviceREST.request(request,""){response ->
             if (response.isHttpSuccess()){
-                val account : User?
+                val account : LoginResponse?
                 try {
-                    account = User.create(response.getDataString())
+                    account = LoginResponse.create(response.getDataString())
                     completion(account, null)
                     Log.i("user", account.toString())
                 }catch (ex : Exception){

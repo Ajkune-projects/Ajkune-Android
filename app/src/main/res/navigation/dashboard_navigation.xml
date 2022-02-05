@@ -46,7 +46,11 @@
         android:id="@+id/gifsFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.GifsFragment"
         android:label="GifsFragment"
-        tools:layout="@layout/gifs_fragment"/>
+        tools:layout="@layout/gifs_fragment">
+        <action
+            android:id="@+id/action_gifsFragment_to_luckyWheelFragment"
+            app:destination="@id/luckyWheelFragment" />
+    </fragment>
     <fragment
         android:id="@+id/offersFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.OffersFragment"
@@ -176,4 +180,9 @@
         android:name="com.ajkune.professional.architecture.fragment.dashboard.LanguageFragment"
         android:label="LanguageFragment"
         tools:layout="@layout/language_fragment"/>
+    <fragment
+        android:id="@+id/luckyWheelFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.LuckyWheelFragment"
+        android:label="LuckyWheelFragment"
+        tools:layout="@layout/lucky_wheel_fragment"/>
 </navigation>

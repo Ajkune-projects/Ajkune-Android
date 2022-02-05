@@ -2,6 +2,7 @@ package com.ajkune.professional.architecture.viewmodels.onboarding
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ajkune.professional.architecture.models.LoginResponse
 import com.ajkune.professional.architecture.models.User
 import com.ajkune.professional.di.anotation.ForUserRest
 import com.ajkune.professional.rest.UserRest
@@ -10,7 +11,7 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(val userRest: UserRest): ViewModel() {
 
-    var accountManager = MutableLiveData<User>()
+    var accountManager = MutableLiveData<LoginResponse>()
     var error = SingleLiveData<Exception>()
 
 

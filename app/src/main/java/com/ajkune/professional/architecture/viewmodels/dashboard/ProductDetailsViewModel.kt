@@ -26,4 +26,15 @@ class ProductDetailsViewModel @Inject constructor(val dashboardRest: DashboardRe
         }
     }
 
+    fun addCommentForOffer(productId : Int, title : String, comment : String){
+        dashboardRest.addCommentForOffer(productId, title, comment){userById , exception ->
+            if (userById != null){
+                this.newComment.postValue(userById)
+            }
+            if (exception != null){
+                error.postValue(exception)
+            }
+        }
+    }
+
 }

@@ -190,7 +190,13 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
             dialog = AppointmentMessageDialog(
                 requireContext(), object : AppointmentMessageDialog.Listener {
                     override fun onConfirmAppointmentClicked(message: String) {
-                        val fullName = baseAccountManager.user?.name  + baseAccountManager.user?.lastName
+                        var fullName = ""
+                        fullName = if (baseAccountManager.user?.lastName != null){
+                            "${baseAccountManager.user?.name.toString()} ${baseAccountManager.user?.lastName.toString()}"
+                        }else{
+                            baseAccountManager.user?.name.toString()
+                        }
+
                         val messageDescription = getString(R.string.message_description, fullName, baseAccountManager.user?.email, message)
 
                         val appointmentBody = AppointmentBody()
@@ -204,17 +210,16 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
                         steps.duration = 60
                         appointmentBody.attributes.steps.add(steps)
                         appointmentBody.relationships.merchant.data.type = "merchants"
+                        appointmentBody.relationships.customer.data.type = "customers"
                         //kena me zavendsu me dinamike
-                        appointmentBody.relationships.merchant.data.id = "98042f81-8d99-48de-9d24-65fdc60774e7"
-                        appointmentBody.relationships.customer.data.id = "58a0c8c8-bb68-48de-bf6a-a1edb00c1d7b"
+                        appointmentBody.relationships.merchant.data.id = merchantId
+                        appointmentBody.relationships.customer.data.id = customerId
 
                         val bodyV2 = BodyV2()
                         bodyV2.data = appointmentBody
 
-
-
-                        viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
-                        viewModel.addNewAppointmentInDashboard(formattedDate, message)
+//                        viewModel.addNewAppointmentV2(appointmentToken, bodyV2)
+//                        viewModel.addNewAppointmentInDashboard(formattedDate, message)
                     }
                 }
             )

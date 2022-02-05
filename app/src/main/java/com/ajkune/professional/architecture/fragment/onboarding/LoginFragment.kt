@@ -53,9 +53,9 @@ class LoginFragment : BaseFragment() {
 
         viewModel.accountManager.observe(this, Observer {
             if (it != null) {
-                baseAccountManager.user = it
+                baseAccountManager.user = it.user
                 baseAccountManager.user!!.token = it.token
-                baseAccountManager.create(it, it.token)
+                baseAccountManager.create(it.user!!, it.token)
                 hideLoader()
                 val intent = Intent(requireContext(), DashboardActivity::class.java)
                 startActivity(intent)

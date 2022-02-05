@@ -48,4 +48,7 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindLanguageFragment(): LanguageFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindLuckyWheelFragment(): LuckyWheelFragment
+
 }

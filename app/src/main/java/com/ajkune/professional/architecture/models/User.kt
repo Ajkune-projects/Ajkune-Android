@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "user_table")
 class User {
@@ -20,9 +21,11 @@ class User {
     var email: String? = null
 
     @ColumnInfo(name = "active_profile")
+    @SerializedName("active_profile")
     var activeProfile: Int? = null
 
     @ColumnInfo(name = "last_name")
+    @SerializedName("last_name")
     var lastName: String? = null
 
     @ColumnInfo(name = "token")

@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.viewmodels.dashboard.GifsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.GifsFragmentBinding
 import com.bluehomestudio.luckywheel.WheelItem
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
 class GifsFragment : BaseFragment() {
@@ -37,6 +40,7 @@ class GifsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
         binding = DataBindingUtil.inflate(inflater, R.layout.gifs_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root
@@ -56,6 +60,9 @@ class GifsFragment : BaseFragment() {
     }
 
     override fun onClickEvents() {
+        binding.btnPlay.setOnClickListener {
+            findNavController().navigate(R.id.action_gifsFragment_to_luckyWheelFragment)
+        }
     }
 
     override fun setToolbar() {
