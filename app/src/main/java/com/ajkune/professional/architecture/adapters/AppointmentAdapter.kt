@@ -94,7 +94,7 @@ class AppointmentAdapter(
                 val currentTime: Int = calendar.get(Calendar.HOUR_OF_DAY)
                 val currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
                 val timeToCheck = appointment.time.take(2)
-                if (currentDayOfMonth == dayOfMonth){
+                if (currentDayOfMonth == dayOfMonth) {
                     if (currentTime >= timeToCheck.toInt()) {
                         appointment.isAppointmentFree = false
                         binding.txtTime.setTextColor(
@@ -106,11 +106,13 @@ class AppointmentAdapter(
                         binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                     }
                 }
-             ///////////////////////
+                ///////////////////////
+
 
                 if (startTime == appointment.time.split(" ")[0]) {
-                    when (currentAppointment.attributes!!.steps?.get(0)?.duration) {
-                        60 -> {
+                    if (currentAppointment.attributes!!.state != "canceled") {
+
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 30..89) {
                             appointment.isAppointmentFree = false
                             appointment.checkAppointment = false
                             binding.txtTime.setTextColor(
@@ -121,9 +123,11 @@ class AppointmentAdapter(
                             )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                         }
-                        
-                        120 -> {
+
+
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 90..149) {
                             appointment.isAppointmentFree = false
+                            appointment.checkAppointment = false
                             items[position + 1].isAppointmentFree = false
                             items[position + 1].checkAppointment = false
                             binding.txtTime.setTextColor(
@@ -134,7 +138,9 @@ class AppointmentAdapter(
                             )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                         }
-                        180 -> {
+
+
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 150..209) {
                             appointment.isAppointmentFree = false
                             items[position + 1].isAppointmentFree = false
                             items[position + 1].checkAppointment = false
@@ -147,39 +153,151 @@ class AppointmentAdapter(
                                 )
                             )
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
-
-                        } 240 ->{
-                        appointment.isAppointmentFree = false
-                        items[position + 1].isAppointmentFree = false
-                        items[position + 1].checkAppointment = false
-                        items[position + 2].isAppointmentFree = false
-                        items[position + 2].checkAppointment = false
-                        items[position + 3].isAppointmentFree = false
-                        items[position + 3].checkAppointment = false
-                        binding.txtTime.setTextColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cl_8c93a9
-                            )
-                        )
-                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
                         }
-                    }
-                }
-            }
 
-
-            if (isClickedRoot) {
-                if (selectedPosition != null) {
-                    if (selectedPosition == position) {
-                        if (appointment.isAppointmentFree) {
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 210..269) {
+                            appointment.isAppointmentFree = false
+                            items[position + 1].isAppointmentFree = false
+                            items[position + 1].checkAppointment = false
+                            items[position + 2].isAppointmentFree = false
+                            items[position + 2].checkAppointment = false
+                            items[position + 3].isAppointmentFree = false
+                            items[position + 3].checkAppointment = false
                             binding.txtTime.setTextColor(
                                 ContextCompat.getColor(
                                     binding.root.context,
-                                    R.color.white
+                                    R.color.cl_8c93a9
                                 )
                             )
-                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        }
+
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 270..329) {
+                            appointment.isAppointmentFree = false
+                            items[position + 1].isAppointmentFree = false
+                            items[position + 1].checkAppointment = false
+                            items[position + 2].isAppointmentFree = false
+                            items[position + 2].checkAppointment = false
+                            items[position + 3].isAppointmentFree = false
+                            items[position + 3].checkAppointment = false
+                            items[position + 4].isAppointmentFree = false
+                            items[position + 4].checkAppointment = false
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_8c93a9
+                                )
+                            )
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        }
+
+                        if (currentAppointment.attributes!!.steps?.get(0)?.duration in 330..389) {
+                            appointment.isAppointmentFree = false
+                            items[position + 1].isAppointmentFree = false
+                            items[position + 1].checkAppointment = false
+                            items[position + 2].isAppointmentFree = false
+                            items[position + 2].checkAppointment = false
+                            items[position + 3].isAppointmentFree = false
+                            items[position + 3].checkAppointment = false
+                            items[position + 4].isAppointmentFree = false
+                            items[position + 4].checkAppointment = false
+                            items[position + 5].isAppointmentFree = false
+                            items[position + 5].checkAppointment = false
+                            binding.txtTime.setTextColor(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color.cl_8c93a9
+                                )
+                            )
+                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+                        }
+                    }
+                }
+                    ////
+
+//                if (startTime == appointment.time.split(" ")[0]) {
+//                    when (currentAppointment.attributes!!.steps?.get(0)?.duration) {
+//                        60 -> {
+//                            appointment.isAppointmentFree = false
+//                            appointment.checkAppointment = false
+//                            binding.txtTime.setTextColor(
+//                                ContextCompat.getColor(
+//                                    binding.root.context,
+//                                    R.color.cl_8c93a9
+//                                )
+//                            )
+//                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+//                        }
+//
+//                        120 -> {
+//                            appointment.isAppointmentFree = false
+//                            items[position + 1].isAppointmentFree = false
+//                            items[position + 1].checkAppointment = false
+//                            binding.txtTime.setTextColor(
+//                                ContextCompat.getColor(
+//                                    binding.root.context,
+//                                    R.color.cl_8c93a9
+//                                )
+//                            )
+//                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+//                        }
+//                        180 -> {
+//                            appointment.isAppointmentFree = false
+//                            items[position + 1].isAppointmentFree = false
+//                            items[position + 1].checkAppointment = false
+//                            items[position + 2].isAppointmentFree = false
+//                            items[position + 2].checkAppointment = false
+//                            binding.txtTime.setTextColor(
+//                                ContextCompat.getColor(
+//                                    binding.root.context,
+//                                    R.color.cl_8c93a9
+//                                )
+//                            )
+//                            binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+//
+//                        } 240 ->{
+//                        appointment.isAppointmentFree = false
+//                        items[position + 1].isAppointmentFree = false
+//                        items[position + 1].checkAppointment = false
+//                        items[position + 2].isAppointmentFree = false
+//                        items[position + 2].checkAppointment = false
+//                        items[position + 3].isAppointmentFree = false
+//                        items[position + 3].checkAppointment = false
+//                        binding.txtTime.setTextColor(
+//                            ContextCompat.getColor(
+//                                binding.root.context,
+//                                R.color.cl_8c93a9
+//                            )
+//                        )
+//                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_opacity_a8466f_white)
+//                        }
+//                    }
+//                }
+                }
+
+
+                if (isClickedRoot) {
+                    if (selectedPosition != null) {
+                        if (selectedPosition == position) {
+                            if (appointment.isAppointmentFree) {
+                                binding.txtTime.setTextColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.white
+                                    )
+                                )
+                                binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f)
+                            }
+                        } else {
+                            if (appointment.isAppointmentFree) {
+                                binding.txtTime.setTextColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.cl_a8466f
+                                    )
+                                )
+                                binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
+                            }
                         }
                     } else {
                         if (appointment.isAppointmentFree) {
@@ -192,18 +310,7 @@ class AppointmentAdapter(
                             binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
                         }
                     }
-                } else {
-                    if (appointment.isAppointmentFree) {
-                        binding.txtTime.setTextColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cl_a8466f
-                            )
-                        )
-                        binding.clMain.setBackgroundResource(R.drawable.border_radius_6_cl_a8466f_white)
-                    }
                 }
-            }
 
 
             binding.root.setOnClickListener {

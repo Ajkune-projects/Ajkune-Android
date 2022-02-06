@@ -106,6 +106,10 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
                 offers.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewOffers()
+
+                if (offers.isEmpty()){
+                    binding.cvEmptyProducts.visibility = View.VISIBLE
+                }
             }
         })
 

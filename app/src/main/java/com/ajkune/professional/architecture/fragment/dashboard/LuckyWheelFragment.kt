@@ -88,10 +88,15 @@ class LuckyWheelFragment : BaseFragment() {
             }
         })
 
+        viewModel.successGiftAdded.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+            }
+        })
+
 
         binding.lwv.setLuckyWheelReachTheTarget {
-            Toast.makeText(requireContext(), "Loja perfundoi,,,, Urime id = $randomGiftId", Toast.LENGTH_LONG).show()
-            //viewModel.addGiftFromSpinner(randomGiftId)
+            viewModel.addGiftFromSpinner(randomGiftId)
         }
     }
 

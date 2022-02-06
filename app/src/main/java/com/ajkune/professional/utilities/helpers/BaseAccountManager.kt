@@ -95,7 +95,7 @@ class BaseAccountManager @Inject constructor(private val context: Context){
     }
 
     fun isLogged(): Boolean {
-        return user != null
+        return token != null
     }
 
     var language: String?
