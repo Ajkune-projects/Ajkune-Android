@@ -26,6 +26,10 @@ import javax.inject.Inject
 import android.graphics.Bitmap
 import java.io.IOException
 import java.net.URL
+import android.os.StrictMode
+
+
+
 
 
 class LuckyWheelFragment : BaseFragment() {
@@ -66,6 +70,8 @@ class LuckyWheelFragment : BaseFragment() {
     }
 
     override fun onLoad() {
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
        val colorList = arrayListOf("#fc6c6c", "#00E6FF", "#F00E6F", "#8c93a9", "#a8466f","#37474f","#FF03DAC5", "#FF6200EE",
            "#ebf0ff","#bfeea3", "#fff493", "#e23eaf","#F03939")
         showLoader()
@@ -76,21 +82,29 @@ class LuckyWheelFragment : BaseFragment() {
                 binding.btnPlay.visibility = View.VISIBLE
                 wheelItems = ArrayList<WheelItem>()
                 it.forEach { gift ->
+                    var imageBitmap : Bitmap? = null
                     giftIds.add(gift.id)
-                    wheelItems?.add( WheelItem(Color.parseColor(colorList.random()), BitmapFactory.decodeResource(resources, R.drawable.home_icon), gift.title))
-                    //wheelItems?.add( WheelItem(Color.parseColor(colorList.random()),  getBitmapFromURL(gift.imageUrl), gift.title))
+                    try {
+                        val url = URL(gift.imageUrl)
+                        imageBitmap = BitmapFactory.decodeStream(url.openStream())
+
+                    } catch (e: IOException) {
+                        println(e)
+                    }
+                    wheelItems?.add( WheelItem(Color.parseColor(colorList.random()),  getResizedBitmap(imageBitmap!!, 100), gift.title))
                 }
-                binding.lwv.visibility = View.VISIBLE
                 binding.lwv.addWheelItems(wheelItems)
                 val randomIndex: Int = ThreadLocalRandom.current().nextInt(giftIds.size)
                 randomGiftId = giftIds[randomIndex]
                 binding.lwv.setTarget(randomGiftId)
+                binding.lwv.visibility = View.VISIBLE
             }
         })
 
         viewModel.successGiftAdded.observe(this, Observer {
             if (it != null) {
                 hideLoader()
+                findNavController().popBackStack()
             }
         })
 
@@ -119,14 +133,17 @@ class LuckyWheelFragment : BaseFragment() {
     }
 
 
-    fun getBitmapFromURL(src: String?): Bitmap? {
-        return try {
-            val url = URL("$src")
-            val image = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-            image
-        } catch (e: IOException) {
-            System.out.println(e)
-            null
+    fun getResizedBitmap(image: Bitmap, maxSize: Int): Bitmap? {
+        var width = image.width
+        var height = image.height
+        val bitmapRatio = width.toFloat() / height.toFloat()
+        if (bitmapRatio > 1) {
+            width = maxSize
+            height = (width / bitmapRatio).toInt()
+        } else {
+            height = maxSize
+            width = (height * bitmapRatio).toInt()
         }
+        return Bitmap.createScaledBitmap(image, width, height, true)
     }
 }
