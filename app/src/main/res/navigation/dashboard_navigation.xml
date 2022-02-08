@@ -86,6 +86,9 @@
         <action
             android:id="@+id/action_accountFragment_to_languageFragment"
             app:destination="@id/languageFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_yourGiftsFragment"
+            app:destination="@id/yourGiftsFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -118,6 +121,10 @@
         <argument
             android:name="dayOfMonth"
             app:argType="integer"/>
+
+        <argument
+            android:name="nextDayOfMonth"
+            app:argType="string"/>
         <action
             android:id="@+id/action_appointmentDetailsFragment_to_successAppointmentFragment"
             app:destination="@id/successAppointmentFragment" />
@@ -185,4 +192,9 @@
         android:name="com.ajkune.professional.architecture.fragment.dashboard.LuckyWheelFragment"
         android:label="LuckyWheelFragment"
         tools:layout="@layout/lucky_wheel_fragment"/>
+    <fragment
+        android:id="@+id/yourGiftsFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.YourGiftsFragment"
+        android:label="YourGiftsFragment"
+        tools:layout="@layout/your_gifts_fragment"/>
 </navigation>

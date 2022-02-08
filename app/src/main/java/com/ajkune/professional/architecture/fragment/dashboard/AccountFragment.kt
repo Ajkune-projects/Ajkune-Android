@@ -72,6 +72,10 @@ class AccountFragment : BaseFragment() {
             findNavController().navigate(R.id.action_accountFragment_to_myProfileFragment)
         }
 
+        binding.txtYourGifts.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_yourGiftsFragment)
+        }
+
         binding.txtLanguage.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_languageFragment)
         }

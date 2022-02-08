@@ -55,8 +55,8 @@ class AppointmentDetailsViewModel @Inject constructor(val dashboardRest: Dashboa
         }
     }
 
-    fun getAllAppointmentByDate(appointmentToken : String, date : String){
-        dashboardRest.getAppointmentByDate(appointmentToken,date){allAppointments, exception ->
+    fun getAllAppointmentByDate(appointmentToken : String, date : String, nextDate : String){
+        dashboardRest.getAppointmentByDate(appointmentToken,date, nextDate){allAppointments, exception ->
             if (allAppointments !=null){
                 this.allAppointments.postValue(allAppointments)
             }

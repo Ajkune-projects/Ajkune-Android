@@ -104,6 +104,11 @@ abstract class ViewModelModule {
     @ViewModelKey(LuckyWheelViewModel::class)
     abstract fun bindLuckyWheelViewModel(luckyWheelViewModel: LuckyWheelViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(YourGiftsViewModel::class)
+    abstract fun bindYourGiftsViewModel(yourGiftsViewModel: YourGiftsViewModel): ViewModel
+
     /**baseFactory for all [ViewModel]*/
     @Binds
     abstract fun bindViewModelFactory(factory: AjkuneViewModelFactory): ViewModelProvider.Factory

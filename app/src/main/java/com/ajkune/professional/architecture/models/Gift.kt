@@ -9,7 +9,7 @@ class Gift {
     var id : Int = 1
     var title : String = ""
     var description : String = ""
-    var status : Int = 0
+    var status : String = ""
 
     @SerializedName("image_url")
     var imageUrl: String? = null

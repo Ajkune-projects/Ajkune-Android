@@ -45,6 +45,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     var allAppointment : MutableList<AllAppointment> = mutableListOf()
 
     var selectedDate : String = ""
+    var nextDayOfMonth : String = ""
     var appointmentTime : String = ""
 
     var currentDayOfMonth : Int = 0
@@ -105,8 +106,9 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         viewModel.appointmentToken.observe(this, Observer {
             if (it != null) {
                 appointmentToken = it.accessToken
-                val formattedDate = selectedDate+"T00:00:00.000"
-                viewModel.getAllAppointmentByDate(appointmentToken,formattedDate)
+                val formattedDate = selectedDate+"T00:00.000Z"
+                val formattedNextDate = nextDayOfMonth+"T00:00.000Z"
+                viewModel.getAllAppointmentByDate(appointmentToken, formattedDate, formattedNextDate)
             }
         })
 
@@ -173,6 +175,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
             AppointmentDetailsFragmentArgs.fromBundle(bundle).let {
                 selectedDate = it.date
                 currentDayOfMonth = it.dayOfMonth
+                nextDayOfMonth = it.nextDayOfMonth
             }
         }
     }

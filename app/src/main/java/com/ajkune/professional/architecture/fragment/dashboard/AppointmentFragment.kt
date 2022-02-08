@@ -84,8 +84,17 @@ class AppointmentFragment :  BaseFragment() {
                 "$dayOfMonth"
             }
 
+            var formattedNextDayOfMonth = ""
+            val nextDay = dayOfMonth+1
+            formattedNextDayOfMonth = if (dayOfMonth.toString().length == 1){
+                "0$nextDay"
+            }else{
+                "$nextDay"
+            }
+
             val date = "$year-$formattedMonth-$formattedDayOfMonth"
-            findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date, dayOfMonth))
+            val nextDate = "$year-$formattedMonth-$formattedNextDayOfMonth"
+            findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date, dayOfMonth, nextDate))
         }
     }
 

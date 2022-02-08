@@ -51,4 +51,8 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindLuckyWheelFragment(): LuckyWheelFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindYourGiftsFragment(): YourGiftsFragment
+
+
 }

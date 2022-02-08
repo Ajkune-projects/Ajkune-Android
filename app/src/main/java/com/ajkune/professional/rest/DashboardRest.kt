@@ -191,9 +191,10 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
         }
     }
 
-    fun getAppointmentByDate(appointmentToken : String, date : String,completion: (List<AllAppointment>?, Exception?) -> Unit){
+    fun getAppointmentByDate(appointmentToken : String, date : String, nextDate : String,completion: (List<AllAppointment>?, Exception?) -> Unit){
 
-        val request = HttpRequest("https://api.shore.com/v2/appointments?filter[starts_at.gt]=$date", null, HttpRequestMethod.GET,true)
+
+        val request = HttpRequest("https://api.shore.com/v2/appointments?filter[starts_at.gt]=$date&filter[starts_at.lt]=$nextDate&page%5Bsize%5D=25&filter[deleted]=false", null, HttpRequestMethod.GET,true)
 
         serviceRest.request(request,appointmentToken){response ->
             if (response.isHttpSuccess()){
@@ -391,6 +392,25 @@ class DashboardRest @Inject constructor(@ForServiceRest private var serviceRest:
                 }else{
                     completion(false, response.getFError())
                 }
+            }
+        }
+    }
+
+    fun getUserGifts(completion: (List<Gift>?, Exception?) -> Unit){
+
+        val request = HttpRequest("gift/win", null, HttpRequestMethod.GET,false)
+
+        serviceRest.request(request,baseAccountManager.token!!){response ->
+            if (response.isHttpSuccess()){
+                val gifs : List<Gift>?
+                try {
+                    gifs = Gift.createArray(response.getJsonArray())
+                    completion(gifs, null)
+                }catch (ex : Exception){
+                    completion(null, ex)
+                }
+            }else{
+                completion(null, response.getFError())
             }
         }
     }

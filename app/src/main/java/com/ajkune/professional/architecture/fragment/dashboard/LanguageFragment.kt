@@ -15,6 +15,8 @@ import com.ajkune.professional.architecture.viewmodels.dashboard.LanguageViewMod
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.databinding.LanguageFragmentBinding
 import com.ajkune.professional.utilities.helpers.BaseAccountManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.util.*
 import javax.inject.Inject
 
@@ -43,6 +45,7 @@ class LanguageFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
         initBaseFunctions()
     }
 
