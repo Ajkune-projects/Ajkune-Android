@@ -109,6 +109,12 @@ abstract class ViewModelModule {
     @ViewModelKey(YourGiftsViewModel::class)
     abstract fun bindYourGiftsViewModel(yourGiftsViewModel: YourGiftsViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(GiftWonViewModel::class)
+    abstract fun bindGiftWonViewModel(giftWonViewModel: GiftWonViewModel): ViewModel
+
+
     /**baseFactory for all [ViewModel]*/
     @Binds
     abstract fun bindViewModelFactory(factory: AjkuneViewModelFactory): ViewModelProvider.Factory

@@ -100,5 +100,8 @@
     <string name="there_is_no_offer_in_this_category">There is no offer in this category!</string>
     <string name="your_gifs">Your gifs</string>
     <string name="you_have_not_won_any_gift">You have not won any gift yet</string>
+    <string name="fill_required_fields">Please fill required fields.</string>
+    <string name="comment_added">Comment added successfully</string>
+    <string name="gift_added_details">Congratulations you have win : %1$s. For more details please contact in this email : %2$s</string>
 
 </resources>

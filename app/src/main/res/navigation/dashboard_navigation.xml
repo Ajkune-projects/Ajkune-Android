@@ -12,10 +12,20 @@
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            />
         <action
             android:id="@+id/action_homeFragment_to_filterProductsFragment"
-            app:destination="@id/filterProductsFragment" />
+            app:destination="@id/filterProductsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            />
 
         <argument
             android:name="minPrice"
@@ -40,7 +50,12 @@
         tools:layout="@layout/appointment_fragment">
         <action
             android:id="@+id/action_appointmentFragment_to_appointmentDetailsFragment"
-            app:destination="@id/appointmentDetailsFragment" />
+            app:destination="@id/appointmentDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            />
     </fragment>
     <fragment
         android:id="@+id/gifsFragment"
@@ -49,7 +64,12 @@
         tools:layout="@layout/gifs_fragment">
         <action
             android:id="@+id/action_gifsFragment_to_luckyWheelFragment"
-            app:destination="@id/luckyWheelFragment" />
+            app:destination="@id/luckyWheelFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"
+            />
     </fragment>
     <fragment
         android:id="@+id/offersFragment"
@@ -58,7 +78,11 @@
         tools:layout="@layout/offers_fragment">
         <action
             android:id="@+id/action_offersFragment_to_filterProductsFragment"
-            app:destination="@id/filterProductsFragment" />
+            app:destination="@id/filterProductsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
 
         <argument
             android:name="minPrice"
@@ -82,13 +106,25 @@
         tools:layout="@layout/account_fragment">
         <action
             android:id="@+id/action_accountFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
+            app:destination="@id/myProfileFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_accountFragment_to_languageFragment"
-            app:destination="@id/languageFragment" />
+            app:destination="@id/languageFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_accountFragment_to_yourGiftsFragment"
-            app:destination="@id/yourGiftsFragment" />
+            app:destination="@id/yourGiftsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -106,7 +142,11 @@
         tools:layout="@layout/my_profile_fragment" >
         <action
             android:id="@+id/action_myProfileFragment_to_addAddressFragment"
-            app:destination="@id/addAddressFragment" />
+            app:destination="@id/addAddressFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/appointmentDetailsFragment"
@@ -155,7 +195,11 @@
             app:destination="@id/homeFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <argument
             android:name="sortType"
             app:argType="string"/>
@@ -191,10 +235,27 @@
         android:id="@+id/luckyWheelFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.LuckyWheelFragment"
         android:label="LuckyWheelFragment"
-        tools:layout="@layout/lucky_wheel_fragment"/>
+        tools:layout="@layout/lucky_wheel_fragment">
+        <action
+            android:id="@+id/action_luckyWheelFragment_to_giftWonFragment"
+            app:destination="@id/giftWonFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/gifsFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
     <fragment
         android:id="@+id/yourGiftsFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.YourGiftsFragment"
         android:label="YourGiftsFragment"
         tools:layout="@layout/your_gifts_fragment"/>
+    <fragment
+        android:id="@+id/giftWonFragment"
+        android:name="com.ajkune.professional.architecture.fragment.dashboard.GiftWonFragment"
+        android:label="GiftWonFragment">
+        <argument
+            android:name="gift"
+            app:argType="string"
+            tools:layout="@layout/gift_won_fragment"/>
+    </fragment>
 </navigation>

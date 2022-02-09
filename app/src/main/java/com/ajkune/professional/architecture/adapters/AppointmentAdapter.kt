@@ -110,7 +110,7 @@ class AppointmentAdapter(
 
 
                 if (startTime == appointment.time.split(" ")[0]) {
-                    if (currentAppointment.attributes!!.state != "canceled") {
+                    if (currentAppointment.attributes!!.state != "canceled" && currentAppointment.attributes!!.address?.postalCode!!.contains("8957")) {
 
                         if (currentAppointment.attributes!!.steps?.get(0)?.duration in 30..89) {
                             appointment.isAppointmentFree = false

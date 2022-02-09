@@ -95,7 +95,7 @@ class YourGiftsFragment : BaseFragment() {
         val recyclerView = binding.rvYourGifts
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter = YourGiftsAdapter()
         adapter.setData(gifts)
         adapter.setHasStableIds(true)

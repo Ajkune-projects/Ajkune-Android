@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.adapters.AppointmentAdapter
 import com.ajkune.professional.architecture.adapters.CommentsAdapter
+import com.ajkune.professional.architecture.models.Offer
 import com.ajkune.professional.architecture.models.Product
 import com.ajkune.professional.architecture.viewmodels.dashboard.ProductDetailsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
 import com.ajkune.professional.base.viewmodel.AjkuneViewModelFactory
 import com.ajkune.professional.databinding.ProductDetailsFragmentBinding
 import com.ajkune.professional.utilities.extensions.loadUrl
+import com.ajkune.professional.utilities.helpers.BaseAccountManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -32,7 +34,12 @@ class ProductDetailsFragment : BaseFragment() {
 
     var product : Product? = null
 
+    var productId : Int = 0
+
     var isProduct : Boolean = false
+
+    @Inject
+    lateinit var baseAccountManager: BaseAccountManager
 
     @Inject
     lateinit var viewModelFactory: AjkuneViewModelFactory
@@ -63,8 +70,22 @@ class ProductDetailsFragment : BaseFragment() {
     }
 
     override fun onLoad() {
-        initView()
-        initRecyclerViewComments()
+
+        showLoader()
+        if (isProduct){
+            viewModel.getProductById(productId)
+        }else{
+            viewModel.getOffersById(productId)
+        }
+
+        viewModel.products.observe(this , Observer {
+            if (it != null) {
+                hideLoader()
+                product = it[0]
+                initView()
+                initRecyclerViewComments()
+            }
+        })
 
         viewModel.newComment.observe(this, Observer {
             if (it != null) {
@@ -77,7 +98,7 @@ class ProductDetailsFragment : BaseFragment() {
                 }
                 binding.etMessageTitle.setText("")
                 binding.etMessageDescription.setText("")
-                Toast.makeText(requireContext(), "Comment added successfully",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.comment_added),Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -129,11 +150,11 @@ class ProductDetailsFragment : BaseFragment() {
     private fun getData(){
         activity?.intent?.let {
             if (it.getStringExtra("PRODUCT_DETAILS") != null && it.getStringExtra("PRODUCT_DETAILS") != "") {
-                product = Gson().fromJson(it.getStringExtra("PRODUCT_DETAILS"), Product::class.java)
+                productId = Gson().fromJson(it.getStringExtra("PRODUCT_DETAILS"), Product::class.java).id
                 isProduct = true
             }
             if (it.getStringExtra("OFFERS_DETAILS") != null && it.getStringExtra("OFFERS_DETAILS") != "") {
-                product = Gson().fromJson(it.getStringExtra("OFFERS_DETAILS"), Product::class.java)
+                productId = Gson().fromJson(it.getStringExtra("OFFERS_DETAILS"), Product::class.java).id
                 isProduct = false
             }
         }
@@ -146,7 +167,26 @@ class ProductDetailsFragment : BaseFragment() {
             binding.imgProductPhoto.loadUrl(product.image)
             binding.txtPrice.text = requireContext().getString(R.string.price, product.price)
             binding.ratingBar2.rating = product.rating.toFloat()
-            binding.txtSpecificationDetails.text = product.descEn
+
+            val current = baseAccountManager.language
+
+            when (current.toString()) {
+                "en_GB" -> {
+                    binding.txtSpecificationDetails.text = product.descEn
+                }
+                "de" -> {
+                    binding.txtSpecificationDetails.text = product.descDe
+                }
+                "fr" -> {
+                    binding.txtSpecificationDetails.text = product.descFr
+                }
+                "it" -> {
+                    binding.txtSpecificationDetails.text = product.descIt
+                }
+                else -> {
+                    binding.txtSpecificationDetails.text = product.descEn
+                }
+            }
         }
     }
 

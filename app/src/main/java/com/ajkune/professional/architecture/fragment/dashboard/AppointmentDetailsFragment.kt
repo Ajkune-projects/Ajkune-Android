@@ -90,6 +90,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         appointment.add(Appointment("15:00 - 16:00"))
         appointment.add(Appointment("16:00 - 17:00"))
         appointment.add(Appointment("17:00 - 18:00"))
+        appointment.add(Appointment("18:00 - 19:00"))
 
 
         showLoader()

@@ -17,4 +17,6 @@ class Attributes {
     var title : String? = null
 
     var subject : String? = null
+
+    var address : AddressResponse? = null
 }

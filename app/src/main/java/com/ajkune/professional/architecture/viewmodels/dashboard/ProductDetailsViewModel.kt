@@ -14,6 +14,8 @@ class ProductDetailsViewModel @Inject constructor(val dashboardRest: DashboardRe
     var newComment = SingleLiveData<List<Product>>()
     var error = SingleLiveData<Exception>()
 
+    val products = SingleLiveData<List<Product>>()
+
 
     fun addCommentForProduct(productId : Int, title : String, comment : String){
         dashboardRest.addCommentForProduct(productId, title, comment){userById , exception ->
@@ -32,6 +34,28 @@ class ProductDetailsViewModel @Inject constructor(val dashboardRest: DashboardRe
                 this.newComment.postValue(userById)
             }
             if (exception != null){
+                error.postValue(exception)
+            }
+        }
+    }
+
+    fun getProductById(productId : Int){
+        dashboardRest.getProductById(productId){products, exception ->
+            if (products !=null){
+                this.products.postValue(products)
+            }
+            if (exception !=null){
+                error.postValue(exception)
+            }
+        }
+    }
+
+    fun getOffersById(offerId : Int){
+        dashboardRest.getOfferById(offerId){products, exception ->
+            if (products !=null){
+                this.products.postValue(products)
+            }
+            if (exception !=null){
                 error.postValue(exception)
             }
         }

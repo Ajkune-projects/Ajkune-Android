@@ -3,6 +3,7 @@ package com.ajkune.professional.architecture.viewmodels.dashboard
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ajkune.professional.architecture.models.Gift
+import com.ajkune.professional.architecture.models.GiftAddedResponse
 import com.ajkune.professional.architecture.models.Offer
 import com.ajkune.professional.architecture.models.VerifyUserAccountBody
 import com.ajkune.professional.rest.DashboardRest
@@ -14,7 +15,7 @@ class LuckyWheelViewModel @Inject constructor(val dashboardRest: DashboardRest) 
 
     val gifts = SingleLiveData<List<Gift>>()
     var error = MutableLiveData<Exception>()
-    var successGiftAdded = SingleLiveData<Boolean>()
+    var gift = MutableLiveData<GiftAddedResponse>()
 
     fun getListOfGifts(){
         dashboardRest.getListOfGifts(){products, exception ->
@@ -28,11 +29,11 @@ class LuckyWheelViewModel @Inject constructor(val dashboardRest: DashboardRest) 
     }
 
     fun addGiftFromSpinner(giftId : Int){
-        dashboardRest.addGiftFromSpinner(giftId){success , exception ->
-            if (success){
-                this.successGiftAdded.postValue(success)
+        dashboardRest.addGiftFromSpinner(giftId){gift , exception ->
+            if (gift != null){
+                this.gift.postValue(gift)
             }
-            if (exception !=null){
+            if (exception != null){
                 error.postValue(exception)
             }
         }

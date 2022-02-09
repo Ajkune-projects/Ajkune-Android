@@ -21,13 +21,12 @@ import com.ajkune.professional.utilities.extensions.loadUrl
 import com.ajkune.professional.utilities.helpers.Screen
 
 class YourGiftsAdapter() : RecyclerView.Adapter<YourGiftsAdapter.ViewHolder>(),
-    BindableAdapter<ArrayList<Gift>> {
+    BindableAdapter<List<Gift>> {
 
-    var items: ArrayList<Gift> = arrayListOf()
+    var items: List<Gift> = listOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun setData(data: ArrayList<Gift>) {
-        items.clear()
+    override fun setData(data: List<Gift>) {
         items = data
         notifyDataSetChanged()
     }
@@ -56,7 +55,11 @@ class YourGiftsAdapter() : RecyclerView.Adapter<YourGiftsAdapter.ViewHolder>(),
     inner class ViewHolder( val binding: ItemYourGiftsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(gift: Gift, position: Int) {
-                binding.txtGiftName.text = gift.status
+                binding.txtGiftName.text = gift.title
+                gift.imageUrl?.let {
+                    binding.imgGift.loadUrl(it)
+                }
+
         }
     }
 }

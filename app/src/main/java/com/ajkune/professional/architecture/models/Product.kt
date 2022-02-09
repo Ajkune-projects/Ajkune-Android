@@ -16,6 +16,14 @@ class Product {
     @SerializedName("desc_en")
     var descEn : String = ""
 
+    @SerializedName("desc_fr")
+    var descFr : String = ""
+
+    @SerializedName("desc_it")
+    var descIt : String = ""
+
+    @SerializedName("desc_de")
+    var descDe : String = ""
 
     @SerializedName("initial_price")
     var initialPrice : String = ""

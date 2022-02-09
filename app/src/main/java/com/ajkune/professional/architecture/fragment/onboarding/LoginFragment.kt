@@ -114,9 +114,9 @@ class LoginFragment : BaseFragment() {
     private fun allLoginFieldsAreFilledCorrect(): Boolean {
         var warningMessage = ""
         if (binding.etEmail.text.toString().isEmpty()) {
-            warningMessage = "Please fill required fields."
+            warningMessage = getString(R.string.fill_required_fields)
         } else if (binding.etPassword.text.toString().isEmpty()) {
-            warningMessage = "Please fill required fields."
+            warningMessage = getString(R.string.fill_required_fields)
         }
 
         if (!warningMessage.isEmpty()) {

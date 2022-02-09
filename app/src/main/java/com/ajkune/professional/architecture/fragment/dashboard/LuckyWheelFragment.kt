@@ -27,9 +27,7 @@ import android.graphics.Bitmap
 import java.io.IOException
 import java.net.URL
 import android.os.StrictMode
-
-
-
+import com.google.gson.Gson
 
 
 class LuckyWheelFragment : BaseFragment() {
@@ -101,10 +99,10 @@ class LuckyWheelFragment : BaseFragment() {
             }
         })
 
-        viewModel.successGiftAdded.observe(this, Observer {
+        viewModel.gift.observe(this, Observer {
             if (it != null) {
                 hideLoader()
-                findNavController().popBackStack()
+                findNavController().navigate(LuckyWheelFragmentDirections.actionLuckyWheelFragmentToGiftWonFragment(Gson().toJson(it.gift)))
             }
         })
 
@@ -115,11 +113,17 @@ class LuckyWheelFragment : BaseFragment() {
     }
 
     override fun onError() {
-
+        viewModel.error.observe(this, Observer {
+            if (it != null) {
+                hideLoader()
+                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onClickEvents() {
         binding.btnPlay.setOnClickListener {
+            binding.btnPlay.isClickable = false
             binding.lwv.rotateWheelTo(randomGiftId)
         }
 
