@@ -105,5 +105,6 @@
     <string name="fill_required_fields">Veuillez remplir les champs obligatoires.</string>
     <string name="comment_added">Commentaire ajouté avec succès.</string>
     <string name="gift_added_details">congratulations you have win : %1$s. For more details please contact in this email : %2$s</string>
+    <string name="selected_date">Date : %1$s</string>
 
 </resources>

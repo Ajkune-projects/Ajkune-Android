@@ -57,6 +57,9 @@ abstract class DashboardActivityModule {
     @ContributesAndroidInjector
     internal abstract fun bindGiftWonFragment(): GiftWonFragment
 
+    @ContributesAndroidInjector
+    internal abstract fun bindCategoryFragment(): CategoryFragment
+
 
 
 

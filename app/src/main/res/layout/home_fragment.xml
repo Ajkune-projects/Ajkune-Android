@@ -8,6 +8,11 @@
     android:background="@color/white"
     tools:context=".architecture.fragment.dashboard.HomeFragment">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:fillViewport="true"
@@ -155,14 +160,28 @@
                                 android:id="@+id/txtBannerPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:fontFamily="@font/gordita_bold"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/gordita_regular"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
                                 app:layout_constraintEnd_toEndOf="@+id/txtBannerText"
+                                app:layout_constraintHorizontal_bias="0.502"
                                 app:layout_constraintStart_toStartOf="@+id/txtBannerText"
                                 app:layout_constraintTop_toBottomOf="@+id/txtBannerText"
                                 tools:text="20.99 flash" />
+
+                            <TextView
+                                android:id="@+id/txtCurrentBannerPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/gordita_bold"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="@+id/txtBannerPrice"
+                                app:layout_constraintStart_toStartOf="@+id/txtBannerPrice"
+                                app:layout_constraintTop_toBottomOf="@+id/txtBannerPrice"
+                                tools:text="10.99 flash" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -223,9 +242,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.core.widget.NestedScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>
 </layout>

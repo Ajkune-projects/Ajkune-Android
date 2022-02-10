@@ -80,6 +80,8 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
     }
 
     override fun onLoad() {
+        binding.txtDate.text = getString(R.string.selected_date, selectedDate)
+
         appointment.add(Appointment("08:00 - 09:00"))
         appointment.add(Appointment("09:00 - 10:00"))
         appointment.add(Appointment("10:00 - 11:00"))

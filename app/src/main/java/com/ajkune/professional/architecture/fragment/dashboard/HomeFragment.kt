@@ -2,6 +2,7 @@ package com.ajkune.professional.architecture.fragment.dashboard
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Paint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.activities.DashboardActivity
 import com.ajkune.professional.architecture.activities.MainActivity
@@ -33,7 +35,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 import kotlin.math.min
 
-class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.Listener {
+class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var binding : HomeFragmentBinding
 
@@ -56,6 +58,8 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     var maxPrice : Int? = null
     var type : String? = null
 
+    var categoryId : Int = 0
+
     companion object {
         fun newInstance() = HomeFragment()
     }
@@ -75,6 +79,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        binding.swipeContainer.setOnRefreshListener(this)
         getData()
         initBaseFunctions()
         initRecyclerViewProducts(products)
@@ -92,14 +97,22 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
             viewModel.filterProductsOrOffers(minPrice!!,maxPrice!!,type!!)
             isFirstTime = false
         }else{
-            showLoader()
-            viewModel.getBanner()
-            if (isFirstTime){
+
+            if (categoryId != 0){
+                showLoader()
+                viewModel.getProductsByCategoryId(categoryId)
+            }else{
+                showLoader()
+                viewModel.getBanner()
+                if (isFirstTime){
+                    isFirstTime = false
+                    viewModel.getActiveCategories()
+                }
+                viewModel.getActiveProducts()
                 isFirstTime = false
-                viewModel.getActiveCategories()
             }
-            viewModel.getActiveProducts()
-            isFirstTime = false
+
+
         }
 
 
@@ -121,6 +134,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                 products.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewProducts(it)
+                binding.swipeContainer.isRefreshing = false
             }
         })
 
@@ -151,7 +165,14 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
             if (it != null) {
                 hideLoader()
                 if (it.isNotEmpty()){
-                    binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                    if(it[0].initialPrice.toDouble() > 0.00){
+                        binding.txtBannerPrice.paintFlags = binding.txtBannerPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        binding.txtBannerPrice.text = binding.root.context.getString(R.string.price, it[0].initialPrice)
+                        binding.txtCurrentBannerPrice.text = getString(R.string.price,it[0].price)
+                    }else{
+                        binding.txtBannerPrice.visibility = View.GONE
+                        binding.txtCurrentBannerPrice.text = getString(R.string.price,it[0].price)
+                    }
                     it[0].imagePath.let {
                         binding.imgBanner.loadUrl(it)
                         binding.imgBanner.visibility = View.VISIBLE
@@ -176,6 +197,10 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
     override fun onClickEvents() {
         binding.txtFilter.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFilterProductsFragment("product"))
+        }
+
+        binding.txtSeeAll.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
     }
 
@@ -231,8 +256,23 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
                         (activity as DashboardActivity).openOfferFragment()
                     }
                 }
+                if (it.categoryId != 0){
+                    categoryId = it.categoryId
+                }
 
             }
         }
+    }
+
+    override fun onRefresh() {
+        categoryId = 0
+        viewModel.getBanner()
+        binding.txtCategory.visibility = View.VISIBLE
+        binding.txtSeeAll.visibility = View.VISIBLE
+        categories.clear()
+        categoryAdapter.isFirstTime = true
+        viewModel.getActiveCategories()
+        viewModel.getActiveProducts()
+        isFirstTime = false
     }
 }

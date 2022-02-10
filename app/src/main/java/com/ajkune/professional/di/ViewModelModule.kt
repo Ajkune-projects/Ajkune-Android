@@ -114,6 +114,12 @@ abstract class ViewModelModule {
     @ViewModelKey(GiftWonViewModel::class)
     abstract fun bindGiftWonViewModel(giftWonViewModel: GiftWonViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoryViewModel::class)
+    abstract fun bindCategoryViewModel(categoryViewModel: CategoryViewModel): ViewModel
+
+
 
     /**baseFactory for all [ViewModel]*/
     @Binds

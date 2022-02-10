@@ -63,11 +63,11 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:textSize="14sp"
                 android:fontFamily="@font/gordita_bold"
-                android:textColor="@color/black"
+                android:gravity="center"
                 android:text="@string/make_appointment_with_ajkune"
+                android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
@@ -79,11 +79,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/hello_and_welcome_to_our_scheduling_page"
+                android:fontFamily="@font/gordita_regular"
                 android:gravity="center"
+                android:text="@string/hello_and_welcome_to_our_scheduling_page"
                 android:textColor="#8c93a9"
                 android:textSize="12sp"
-                android:fontFamily="@font/gordita_regular"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -98,7 +99,7 @@
                 android:background="#ebf0ff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAppointment"
@@ -138,6 +139,21 @@
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/selected_date"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:text="Date : 02-02-2022"
+                android:fontFamily="@font/gordita_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

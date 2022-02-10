@@ -107,7 +107,7 @@ class FilterProductsFragment : BaseFragment() {
 
         binding.btnDone.setOnClickListener {
             if (type == "product"){
-                findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToHomeFragment(startPrice,endPrice,type))
+                findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToHomeFragment(startPrice,endPrice,type,0))
             }else{
                 findNavController().navigate(FilterProductsFragmentDirections.actionFilterProductsFragmentToOffersFragment(startPrice,endPrice,type))
             }

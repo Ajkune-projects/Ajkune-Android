@@ -2,6 +2,7 @@ package com.ajkune.professional.architecture.fragment.dashboard
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Paint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -116,7 +117,15 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
         viewModel.banners.observe(this, Observer {
             if (it != null) {
                 if (it.isNotEmpty()){
-                    binding.txtBannerPrice.text = getString(R.string.price,it[0].price)
+                    if(it[0].initialPrice.toDouble() > 0.00){
+                        binding.txtBannerPrice.paintFlags = binding.txtBannerPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        binding.txtBannerPrice.text = binding.root.context.getString(R.string.price, it[0].initialPrice)
+                        binding.txtCurrentBannerPrice.text = getString(R.string.price,it[0].price)
+                    }else{
+                        binding.txtBannerPrice.visibility = View.GONE
+                        binding.txtCurrentBannerPrice.text = getString(R.string.price,it[0].price)
+                    }
+
                     it[0].imagePath.let {
                         binding.imgBanner.loadUrl(it)
                         binding.imgBanner.visibility = View.VISIBLE
