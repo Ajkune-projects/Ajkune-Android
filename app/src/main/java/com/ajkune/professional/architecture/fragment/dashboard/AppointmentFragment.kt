@@ -3,6 +3,7 @@ package com.ajkune.professional.architecture.fragment.dashboard
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.http.SslError
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.SslErrorHandler
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.CalendarView
 import androidx.databinding.DataBindingUtil
 import com.ajkune.professional.R
@@ -24,15 +28,22 @@ import android.widget.Toast
 
 import android.widget.CalendarView.OnDateChangeListener
 import androidx.navigation.fragment.findNavController
+import com.ajkune.professional.utilities.helpers.BaseAccountManager
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class AppointmentFragment :  BaseFragment() {
 
-    lateinit var calendarView: CalendarView
+    @Inject
+    lateinit var baseAccountManager : BaseAccountManager
+
+    var languageCode : String = "de-CH"
 
     lateinit var binding : AppointmentFragmentBinding
+
+    var url : String = ""
 
     companion object {
         fun newInstance() = AppointmentFragment()
@@ -55,10 +66,54 @@ class AppointmentFragment :  BaseFragment() {
         initBaseFunctions()
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onLoad() {
-        calendarView = binding.calendarView// get the reference of CalendarView
 
-        calendarView.minDate = calendarView.date
+        val current = baseAccountManager.language
+
+        when (current.toString()) {
+            "en_GB" -> {
+                languageCode = "en-CH"
+            }
+            "en" ->{
+                languageCode = "en-CH"
+            }
+            "de" -> {
+                languageCode = "de-CH"
+            }
+            "fr" -> {
+                languageCode = "fr-CH"
+            }
+            "it" -> {
+                languageCode = "it-CH"
+            }
+            else -> {
+                languageCode = "de-CH"
+            }
+        }
+
+        url = "https://connect.shore.com/bookings/ajkune-professional-spreitenbach-nbz/locations?locale=$languageCode"
+
+        val webView =  binding.webView
+        webView.settings.javaScriptEnabled = true
+        webView.scrollBarStyle = WebView.SCROLLBARS_OUTSIDE_OVERLAY
+        webView.settings.javaScriptCanOpenWindowsAutomatically = true
+        //this fixed for loading dynamilcy context
+        webView.settings.domStorageEnabled = true
+
+        webView.loadUrl(url)
+
+        webView.webViewClient = object : WebViewClient() {
+
+            override fun onReceivedSslError(
+                view: WebView?,
+                handler: SslErrorHandler?,
+                error: SslError?
+            ) {
+                super.onReceivedSslError(view, handler!!, error)
+                handler.proceed()
+            }
+        }
     }
 
     override fun onError() {
@@ -66,36 +121,7 @@ class AppointmentFragment :  BaseFragment() {
 
     @SuppressLint("SimpleDateFormat")
     override fun onClickEvents() {
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            Log.i("testCalendar", "$year $month $dayOfMonth")
-            val updatedMonth = month+1
 
-            var formattedMonth = ""
-            formattedMonth = if (updatedMonth.toString().length ==1){
-                "0$updatedMonth"
-            }else{
-                "$updatedMonth"
-            }
-
-            var formattedDayOfMonth = ""
-            formattedDayOfMonth = if (dayOfMonth.toString().length == 1){
-                "0$dayOfMonth"
-            }else{
-                "$dayOfMonth"
-            }
-
-            var formattedNextDayOfMonth = ""
-            val nextDay = dayOfMonth+1
-            formattedNextDayOfMonth = if (dayOfMonth.toString().length == 1){
-                "0$nextDay"
-            }else{
-                "$nextDay"
-            }
-
-            val date = "$year-$formattedMonth-$formattedDayOfMonth"
-            val nextDate = "$year-$formattedMonth-$formattedNextDayOfMonth"
-            findNavController().navigate(AppointmentFragmentDirections.actionAppointmentFragmentToAppointmentDetailsFragment(date, dayOfMonth, nextDate))
-        }
     }
 
     override fun setToolbar() {
