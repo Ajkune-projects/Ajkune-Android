@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.adapters.CategoryAdapter
 import com.ajkune.professional.architecture.adapters.YourGiftsAdapter
@@ -23,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
-class YourGiftsFragment : BaseFragment() {
+class YourGiftsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var binding : YourGiftsFragmentBinding
 
@@ -53,6 +54,7 @@ class YourGiftsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
         viewModel = ViewModelProvider(this, viewModelFactory)[YourGiftsViewModel::class.java]
+        binding.swipeContainer.setOnRefreshListener(this)
         initBaseFunctions()
         initRecyclerViewCategory()
     }
@@ -73,6 +75,7 @@ class YourGiftsFragment : BaseFragment() {
                 if (gifts.isEmpty()){
                     binding.cvEmptyGifts.visibility = View.VISIBLE
                 }
+                binding.swipeContainer.isRefreshing = false
             }
         })
     }
@@ -101,6 +104,10 @@ class YourGiftsFragment : BaseFragment() {
         adapter.setHasStableIds(true)
         recyclerView.adapter = adapter
 
+    }
+
+    override fun onRefresh() {
+        viewModel.getListOfGifts()
     }
 
 }

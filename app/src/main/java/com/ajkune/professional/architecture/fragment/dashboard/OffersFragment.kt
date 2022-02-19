@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.activities.DashboardActivity
 import com.ajkune.professional.architecture.activities.ProductDetailsActivity
@@ -34,7 +35,7 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
-class OffersFragment : BaseFragment(), OffersAdapter.Listener {
+class OffersFragment : BaseFragment(), OffersAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
 
     lateinit var binding : OffersFragmentBinding
 
@@ -70,6 +71,7 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[OffersViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        binding.swipeContainer.setOnRefreshListener(this)
         getData()
         initBaseFunctions()
         initRecyclerViewOffers()
@@ -97,6 +99,7 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
                 offers.addAll(it)
                 binding.rvProducts.adapter?.notifyDataSetChanged()
                 initRecyclerViewOffers()
+                binding.swipeContainer.isRefreshing = false
             }
         })
 
@@ -187,5 +190,10 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener {
         val intent = Intent(requireActivity(), ProductDetailsActivity::class.java)
         intent.putExtra("OFFERS_DETAILS", Gson().toJson(product))
         startActivity(intent)
+    }
+
+    override fun onRefresh() {
+        viewModel.getBanner()
+        viewModel.getAllOffers()
     }
 }

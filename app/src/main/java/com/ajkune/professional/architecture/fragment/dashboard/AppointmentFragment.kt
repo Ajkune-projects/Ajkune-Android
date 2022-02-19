@@ -114,6 +114,12 @@ class AppointmentFragment :  BaseFragment() {
                 handler.proceed()
             }
         }
+
+        binding.btnGoBack.setOnClickListener {
+            if (webView.canGoBack()) {
+                webView.goBack();
+            }
+        }
     }
 
     override fun onError() {

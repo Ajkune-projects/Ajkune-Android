@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.ajkune.professional.R
 import com.ajkune.professional.architecture.viewmodels.dashboard.GifsViewModel
 import com.ajkune.professional.base.fragment.BaseFragment
@@ -21,7 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
-class GifsFragment : BaseFragment() {
+class GifsFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshListener{
 
     lateinit var binding : GifsFragmentBinding
 
@@ -50,6 +51,7 @@ class GifsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[GifsViewModel::class.java]
+        binding.swipeContainer.setOnRefreshListener(this)
         initBaseFunctions()
     }
 
@@ -67,6 +69,7 @@ class GifsFragment : BaseFragment() {
                     binding.clPlay.visibility = View.GONE
                     binding.cvEmptyGifts.visibility = View.VISIBLE
                 }
+                binding.swipeContainer.isRefreshing = false
             }
         })
 
@@ -82,5 +85,9 @@ class GifsFragment : BaseFragment() {
     }
 
     override fun setToolbar() {
+    }
+
+    override fun onRefresh() {
+        viewModel.hasGifts()
     }
 }
