@@ -59,7 +59,6 @@ class YourGiftsAdapter() : RecyclerView.Adapter<YourGiftsAdapter.ViewHolder>(),
                 gift.imageUrl?.let {
                     binding.imgGift.loadUrl(it)
                 }
-
         }
     }
 }
