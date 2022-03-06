@@ -79,6 +79,7 @@ class HomeFragment : BaseFragment(), CategoryAdapter.Listener, ProductsAdapter.L
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[HomeViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        activity?.imgGift?.visibility = View.VISIBLE
         binding.swipeContainer.setOnRefreshListener(this)
         getData()
         initBaseFunctions()

@@ -265,7 +265,8 @@
     <fragment
         android:id="@+id/giftWonFragment"
         android:name="com.ajkune.professional.architecture.fragment.dashboard.GiftWonFragment"
-        android:label="GiftWonFragment">
+        android:label="GiftWonFragment"
+        tools:layout="@layout/gift_won_fragment">
         <argument
             android:name="gift"
             app:argType="string"

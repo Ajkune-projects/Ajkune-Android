@@ -100,6 +100,7 @@ class MyProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
+        activity?.imgGift?.visibility = View.GONE
         binding = DataBindingUtil.inflate(inflater, R.layout.my_profile_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root

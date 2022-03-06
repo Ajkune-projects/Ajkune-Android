@@ -40,7 +40,6 @@ class AccountFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
         binding = DataBindingUtil.inflate(inflater, R.layout.account_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root
@@ -48,11 +47,17 @@ class AccountFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.imgGift?.visibility = View.VISIBLE
+        activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
         viewModel = ViewModelProvider(this,viewModelFactory)[AccountViewModel::class.java]
         initBaseFunctions()
     }
 
     override fun onLoad() {
+        requireActivity().runOnUiThread {
+            activity?.imgGift?.visibility = View.VISIBLE
+            activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        }
     }
 
     override fun onError() {

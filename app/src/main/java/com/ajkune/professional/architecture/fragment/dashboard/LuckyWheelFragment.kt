@@ -62,6 +62,7 @@ class LuckyWheelFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
+        activity?.imgGift?.visibility = View.GONE
         viewModel = ViewModelProvider(this,viewModelFactory)[LuckyWheelViewModel::class.java]
         //generateWheelItems()
         initBaseFunctions()

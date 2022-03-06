@@ -65,6 +65,7 @@ class ProductDetailsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[ProductDetailsViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
+        activity?.imgGift?.visibility = View.GONE
         getData()
         initBaseFunctions()
     }

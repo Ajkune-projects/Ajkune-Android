@@ -7,16 +7,158 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-
-        <com.ajkune.professional.architecture.models.CustomBottomNavigationView
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/dashboardNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="?attr/actionBarSize"
+            app:elevation="20dp"
+            android:background="@drawable/white_rounded_top_15_background"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        </com.ajkune.professional.architecture.models.CustomBottomNavigationView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:id="@+id/homeFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center|center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/homeFragmentIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/home_icon"
+                        app:tint="@color/cl_a8466f" />
+
+                    <TextView
+                        android:id="@+id/homeFragmentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_bold"
+                        android:gravity="center"
+                        android:text="@string/home"
+                        android:textColor="@color/cl_a8466f"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/appointmentFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/appointmentFragmentIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/appointment_icon" />
+
+                    <TextView
+                        android:id="@+id/appointmentFragmentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_bold"
+                        android:gravity="center"
+                        android:text="@string/appointment"
+                        android:textColor="@color/cl_8c93a9"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/gifsFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:id="@+id/giftsFragmentIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/gifs_icon" />
+
+                    <TextView
+                        android:id="@+id/giftsFragmentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_bold"
+                        android:gravity="center"
+                        android:text="@string/gifs"
+                        android:textColor="@color/cl_8c93a9"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/offersFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/offersFragmentIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/offers_icon" />
+
+                    <TextView
+                        android:id="@+id/offersFragmentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_bold"
+                        android:gravity="center"
+                        android:text="@string/offers"
+                        android:textColor="@color/cl_8c93a9"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/accountFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/accountFragmentIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/account_icon" />
+
+                    <TextView
+                        android:id="@+id/accountFragmentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gordita_bold"
+                        android:gravity="center"
+                        android:text="@string/account"
+                        android:textColor="@color/cl_8c93a9"
+                        android:textSize="9sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
 
         <fragment
             android:id="@+id/nav_host_fragment_home"
@@ -29,6 +171,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/dashboard_navigation" />
+
+        <ImageView
+            android:id="@+id/imgGift"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="18dp"
+            android:translationZ="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboardNavigationView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/gift_new_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

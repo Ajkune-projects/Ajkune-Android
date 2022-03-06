@@ -71,6 +71,7 @@ class OffersFragment : BaseFragment(), OffersAdapter.Listener, SwipeRefreshLayou
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory)[OffersViewModel::class.java]
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        activity?.imgGift?.visibility = View.VISIBLE
         binding.swipeContainer.setOnRefreshListener(this)
         getData()
         initBaseFunctions()

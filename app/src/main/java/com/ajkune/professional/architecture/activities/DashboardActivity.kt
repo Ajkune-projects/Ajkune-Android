@@ -79,27 +79,27 @@ class DashboardActivity : BaseActivity() {
             navHostFragment!!.navController
         )
 
-        binding.dashboardNavigationView.homeFragment.setOnClickListener {
+        binding.homeFragment.setOnClickListener {
             navHostFragment.navController.navigate(R.id.homeFragment)
             changeBottomFocusScreen("HomeFragment")
         }
 
-        binding.dashboardNavigationView.appointmentFragment.setOnClickListener {
+        binding.appointmentFragment.setOnClickListener {
             navHostFragment.navController.navigate(R.id.appointmentFragment)
             changeBottomFocusScreen("AppointmentFragment")
         }
 
-        binding.dashboardNavigationView.gifsFragment.setOnClickListener {
+        binding.imgGift.setOnClickListener {
             navHostFragment.navController.navigate(R.id.gifsFragment)
             changeBottomFocusScreen("GifsFragment")
         }
 
-        binding.dashboardNavigationView.offersFragment.setOnClickListener {
+        binding.offersFragment.setOnClickListener {
             navHostFragment.navController.navigate(R.id.offersFragment)
             changeBottomFocusScreen("OffersFragment")
         }
 
-        binding.dashboardNavigationView.accountFragment.setOnClickListener {
+        binding.accountFragment.setOnClickListener {
             navHostFragment.navController.navigate(R.id.accountFragment)
             changeBottomFocusScreen("AccountFragment")
         }

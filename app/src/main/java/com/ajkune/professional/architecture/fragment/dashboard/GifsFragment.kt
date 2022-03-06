@@ -43,6 +43,7 @@ class GifsFragment : BaseFragment() , SwipeRefreshLayout.OnRefreshListener{
         savedInstanceState: Bundle?
     ): View? {
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        activity?.imgGift?.visibility = View.VISIBLE
         binding = DataBindingUtil.inflate(inflater, R.layout.gifs_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root

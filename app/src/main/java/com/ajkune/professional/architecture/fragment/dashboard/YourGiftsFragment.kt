@@ -53,6 +53,7 @@ class YourGiftsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
+        activity?.imgGift?.visibility = View.GONE
         viewModel = ViewModelProvider(this, viewModelFactory)[YourGiftsViewModel::class.java]
         binding.swipeContainer.setOnRefreshListener(this)
         initBaseFunctions()
@@ -86,6 +87,7 @@ class YourGiftsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onClickEvents() {
         binding.imgBack.setOnClickListener {
+
             findNavController().popBackStack()
         }
     }
@@ -110,4 +112,8 @@ class YourGiftsFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         viewModel.getListOfGifts()
     }
 
+    override fun onDestroy() {
+        activity?.imgGift?.visibility = View.VISIBLE
+        super.onDestroy()
+    }
 }

@@ -66,6 +66,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
         savedInstanceState: Bundle?
     ): View? {
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
+        activity?.imgGift?.visibility = View.GONE
         binding = DataBindingUtil.inflate(inflater, R.layout.appointment_details_fragment, container, false)
         binding.lifecycleOwner = this
         return binding.root
@@ -73,7 +74,6 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.dashboardNavigationView?.visibility = BottomNavigationView.GONE
         viewModel = ViewModelProvider(this,viewModelFactory)[AppointmentDetailsViewModel::class.java]
         getData()
         initBaseFunctions()
@@ -158,6 +158,7 @@ class AppointmentDetailsFragment : BaseFragment() , AppointmentAdapter.Listener{
 
     override fun onDestroy() {
         activity?.dashboardNavigationView?.visibility = BottomNavigationView.VISIBLE
+        activity?.imgGift?.visibility = View.VISIBLE
         super.onDestroy()
     }
 
